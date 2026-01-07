@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 
 /* =========================================================
-   HOME PAGE – GOVERNMENT STYLE | CONTENT HEAVY | RESPONSIVE
+   HOME PAGE – GOVERNMENT STYLE | REFINED & RESPONSIVE
    ========================================================= */
 
 const heroSlides = [
@@ -15,256 +15,281 @@ const heroSlides = [
   "/images/ss5.png",
 ];
 
+const stats = [
+  { label: "कुल जनसंख्या", value: "5,000+" },
+  { label: "कुल वार्ड", value: "11" },
+  { label: "साक्षरता दर", value: "78%" },
+  { label: "क्षेत्रफल (हे.)", value: "1240" },
+];
+
 export default function HomePage() {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
     const t = setInterval(() => {
       setActive((p) => (p + 1) % heroSlides.length);
-    }, 6000);
+    }, 5000);
     return () => clearInterval(t);
   }, []);
 
   return (
-    <main className="bg-slate-50 overflow-x-hidden">
-      {/* ================= HERO ================= */}
-      <section className="relative h-[90vh] bg-black">
-        {/* Carousel of images instead of videos for better control and beauty */}
-        <div className="absolute inset-0">
-          {heroSlides.map((slide, index) => (
+    <main className="bg-slate-50 overflow-x-hidden font-sans">
+      
+      {/* ================= NEWS TICKER ================= */}
+      <div className="bg-orange-600 text-white py-2 overflow-hidden whitespace-nowrap relative z-30">
+        <div className="flex animate-marquee">
+          <span className="mx-4 text-sm md:text-base font-medium">
+            सूचना: ग्राम सभा की अगली बैठक 15 जनवरी को पंचायत भवन में आयोजित की जाएगी।
+          </span>
+          <span className="mx-4 text-sm md:text-base font-medium">
+            • प्रधानमंत्री आवास योजना की नई सूची जारी हो चुकी है।
+          </span>
+          <span className="mx-4 text-sm md:text-base font-medium">
+            • स्वच्छ भारत अभियान के तहत कचरा प्रबंधन में सहयोग करें।
+          </span>
+        </div>
+      </div>
+
+      {/* ================= HERO SECTION ================= */}
+      <section className="relative h-[70vh] md:h-[85vh] w-full overflow-hidden">
+        {heroSlides.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              index === active ? "opacity-100" : "opacity-0"
+            }`}
+          >
             <Image
-              key={index}
               src={slide}
               fill
-              alt={`Hero slide ${index + 1}`}
-              className={`object-cover transition-opacity duration-1000 ${
-                index === active ? "opacity-100" : "opacity-0"
-              }`}
+              priority={index === 0}
+              alt={`Slide ${index}`}
+              className="object-cover"
             />
-          ))}
-        </div>
-        <div className="absolute inset-0 bg-black/50" /> {/* Adjusted overlay for better text visibility */}
+            {/* Darker gradient for better text readability */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-transparent md:from-blue-900/60" />
+          </div>
+        ))}
 
-        {/* Carousel indicators */}
-        <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
-          {heroSlides.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => setActive(index)}
-              className={`w-3 h-3 rounded-full transition-colors ${
-                index === active ? "bg-white" : "bg-white/50"
-              }`}
-            />
-          ))}
-        </div>
-
-        <div className="relative z-10 h-full flex items-center">
-          <div className="max-w-7xl mx-auto px-6 text-white">
-            <h1 className="text-4xl md:text-6xl font-bold mb-6 drop-shadow-lg">
-              ग्राम पंचायत लॉंगवाला
+        <div className="relative z-20 h-full max-w-7xl mx-auto px-6 flex flex-col justify-center">
+          <div className="max-w-2xl text-white">
+            <span className="inline-block px-4 py-1 bg-orange-500 text-xs font-bold tracking-widest uppercase rounded mb-4">
+              आधिकारिक पोर्टल
+            </span>
+            <h1 className="text-4xl md:text-7xl font-extrabold mb-6 leading-tight drop-shadow-xl">
+              ग्राम पंचायत <br />
+              <span className="text-orange-400">लॉंगवाला</span>
             </h1>
-            <p className="text-lg md:text-2xl max-w-3xl leading-relaxed drop-shadow-md">
-              आपके विश्वास, सहभागिता एवं मत की शक्ति से ग्राम पंचायत लॉंगवाला
-              निरंतर विकास, पारदर्शी प्रशासन एवं डिजिटल गवर्नेंस के पथ पर
-              अग्रसर है।
+            <p className="text-lg md:text-2xl text-slate-100 mb-8 leading-relaxed drop-shadow-md">
+              विकास, पारदर्शिता एवं सुशासन के प्रति समर्पित। हम मिलकर बना रहे हैं एक आदर्श और डिजिटल ग्राम पंचायत।
             </p>
+            <div className="flex flex-wrap gap-4">
+              <button className="bg-white text-blue-900 px-8 py-3 rounded-full font-bold hover:bg-orange-500 hover:text-white transition-all shadow-lg">
+                विकास कार्य देखें
+              </button>
+              <button className="border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white/10 transition-all">
+                संपर्क करें
+              </button>
+            </div>
           </div>
         </div>
-      </section>
 
-      {/* ================= INTRO ================= */}
-      <section className="bg-white py-24">
-        <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-4xl font-bold text-blue-900 mb-8">
-            ग्राम पंचायत का परिचय
-          </h2>
-
-          <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            ग्राम पंचायत लॉंगवाला राजस्थान राज्य के श्रीगंगानगर जिले में स्थित
-            एक सुदृढ़, संगठित एवं विकासोन्मुख ग्रामीण प्रशासनिक इकाई है।
-            पंचायत भारतीय संविधान के 73वें संशोधन के अंतर्गत स्थापित
-            त्रिस्तरीय पंचायती राज व्यवस्था का अभिन्न अंग है।
-          </p>
-
-          <p className="text-gray-700 text-lg leading-relaxed mb-6">
-            पंचायत का मुख्य उद्देश्य ग्रामीण नागरिकों को बेहतर
-            आधारभूत संरचना, शिक्षा, स्वास्थ्य, स्वच्छता, पेयजल,
-            सड़क एवं रोजगार के अवसर प्रदान करना है।
-            प्रशासनिक पारदर्शिता एवं नागरिक सहभागिता
-            पंचायत की कार्यशैली का मूल आधार है।
-          </p>
-
-          <p className="text-gray-700 text-lg leading-relaxed">
-            यह डिजिटल पोर्टल पंचायत के विकास कार्यों,
-            योजनाओं, उपलब्धियों एवं भावी दृष्टिकोण को
-            नागरिकों के समक्ष प्रस्तुत करने हेतु
-            एक आधिकारिक स्थिर (Static) मंच है।
-          </p>
+        {/* Carousel Indicators */}
+        <div className="absolute bottom-10 right-10 z-20 flex gap-2">
+          {heroSlides.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => setActive(i)}
+              className={`h-2 transition-all rounded-full ${
+                active === i ? "w-10 bg-orange-500" : "w-4 bg-white/50"
+              }`}
+            />
+          ))}
         </div>
       </section>
 
-      {/* ================= COLLAGE ================= */}
-      <section className="bg-slate-100 py-28">
-        <div className="max-w-[1400px] mx-auto px-6">
-          <h2 className="text-4xl font-bold text-blue-900 mb-14 text-center md:text-left">
-            विकास कार्यों की झलक
-          </h2>
-
-          {/* Enhanced grid for elegance: Adjusted for better visual balance, added hover effects, and ensured responsiveness */}
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 h-auto md:h-[700px]">
-            {/* Large image on left/top */}
-            <div className="col-span-1 md:col-span-6 row-span-1 md:row-span-6 relative rounded-xl overflow-hidden shadow-2xl hover:shadow-3xl transition-shadow duration-300">
-              <Image
-                src="/images/ss1.png"
-                fill
-                alt="Development work 1"
-                className="object-cover hover:scale-105 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+      {/* ================= QUICK STATS ================= */}
+      <section className="relative z-30 -mt-12 max-w-6xl mx-auto px-4">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
+          {stats.map((stat, i) => (
+            <div key={i} className="bg-white p-6 rounded-2xl shadow-xl text-center border-b-4 border-blue-900 transform hover:-translate-y-1 transition-transform">
+              <div className="text-2xl md:text-4xl font-black text-blue-900 mb-1">{stat.value}</div>
+              <div className="text-gray-500 text-sm md:text-base font-medium">{stat.label}</div>
             </div>
+          ))}
+        </div>
+      </section>
 
-            {/* Smaller images in a 2x2 grid on right/bottom */}
-            <div className="col-span-1 md:col-span-6 grid grid-cols-2 gap-4">
-              {["ss2", "ss3", "ss4", "ss5"].map((img, i) => (
-                <div
-                  key={i}
-                  className="relative rounded-xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 aspect-square"
-                >
-                  <Image
-                    src={`/images/${img}.png`}
-                    fill
-                    alt={`Development work ${i + 2}`}
-                    className="object-cover hover:scale-105 transition-transform duration-500"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent"></div>
-                </div>
-              ))}
+      {/* ================= INTRODUCTION ================= */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+          <div>
+            <h2 className="text-blue-900 text-sm font-bold uppercase tracking-widest mb-3">स्वागतम</h2>
+            <h3 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">
+              ग्राम पंचायत का परिचय एवं <span className="text-blue-700">उद्देश्य</span>
+            </h3>
+            <div className="space-y-4 text-gray-600 text-lg leading-relaxed text-justify">
+              <p>
+                ग्राम पंचायत लॉंगवाला राजस्थान के श्रीगंगानगर जिले की एक प्रमुख पंचायत है। यह डिजिटल पोर्टल नागरिकों को सरकारी योजनाओं, विकास कार्यों और प्रशासनिक निर्णयों से सीधे जोड़ने का एक सशक्त माध्यम है।
+              </p>
+              <p>
+                हमारा लक्ष्य 100% साक्षरता, आधुनिक कृषि तकनीक, और उन्नत स्वास्थ्य सुविधाएँ उपलब्ध कराना है। पंचायत भारतीय संविधान के 73वें संशोधन के अनुरूप पारदर्शिता और जवाबदेही के साथ कार्य कर रही है।
+              </p>
+            </div>
+          </div>
+          <div className="relative group">
+            <div className="absolute -inset-4 bg-orange-100 rounded-2xl -rotate-2 group-hover:rotate-0 transition-transform duration-500" />
+            <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl">
+              <Image src="/images/ss1.png" fill alt="About Panchayat" className="object-cover" />
             </div>
           </div>
         </div>
       </section>
 
-      {/* ================= DEVELOPMENT SECTIONS ================= */}
-      {[
-        {
-          title: "सड़क एवं आधारभूत संरचना",
-          img: "/images/ss2.png",
-          text: `पंचायत क्षेत्र में पक्की सड़कों, संपर्क मार्गों,
-          नालियों, सार्वजनिक भवनों एवं यातायात सुविधाओं
-          का व्यापक स्तर पर विकास किया गया है।
-          इन परियोजनाओं के माध्यम से ग्राम को
-          जिला मुख्यालय एवं समीपवर्ती क्षेत्रों से
-          बेहतर रूप से जोड़ा गया है।
-          इससे न केवल आवागमन सुलभ हुआ है,
-          बल्कि सामाजिक-आर्थिक गतिविधियों को
-          भी नई गति प्राप्त हुई है।`,
-        },
-        {
-          title: "कृषि एवं सिंचाई विकास",
-          img: "/images/ss3.png",
-          text: `कृषि ग्राम पंचायत लॉंगवाला की अर्थव्यवस्था का
-          प्रमुख आधार है।
-          नहर आधारित सिंचाई व्यवस्था, जल संरक्षण,
-          मृदा परीक्षण एवं आधुनिक कृषि तकनीकों के
-          माध्यम से उत्पादन क्षमता में
-          उल्लेखनीय वृद्धि हुई है।
-          किसानों को सरकारी योजनाओं का
-          समयबद्ध लाभ प्रदान किया जा रहा है।`,
-        },
-        {
-          title: "स्वच्छता एवं पेयजल व्यवस्था",
-          img: "/images/ss4.png",
-          text: `स्वच्छ भारत मिशन के अंतर्गत
-          शौचालय निर्माण, कचरा प्रबंधन,
-          जल शुद्धिकरण एवं
-          स्वच्छता जागरूकता अभियानों
-          का सफल संचालन किया गया है।
-          प्रत्येक परिवार तक
-          सुरक्षित पेयजल पहुँचाना
-          पंचायत की सर्वोच्च प्राथमिकताओं में शामिल है।`,
-        },
-        {
-          title: "डिजिटल एवं सामाजिक सशक्तिकरण",
-          img: "/images/ss5.png",
-          text: `डिजिटल सेवाओं के माध्यम से
-          प्रमाण पत्र, शिकायत निवारण,
-          सूचना प्रसारण एवं योजनाओं की जानकारी
-          नागरिकों तक पहुँचाई जा रही है।
-          महिला स्वयं सहायता समूह,
-          युवा कौशल विकास एवं
-          सामाजिक समावेशन कार्यक्रमों
-          को विशेष प्राथमिकता दी जा रही है।`,
-        },
-      ].map((sec, i) => (
-        <section key={i} className="bg-white py-28">
-          <div className="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-2 gap-14 items-start"> {/* Changed items-center to items-start for better alignment */}
-            {i % 2 === 0 ? (
-              <>
-                <div className="order-2 md:order-1">
-                  <h3 className="text-3xl md:text-4xl font-bold text-blue-900 mb-6">
-                    {sec.title}
-                  </h3>
-                  <p className="text-gray-700 text-lg leading-relaxed whitespace-pre-line">
-                    {sec.text}
-                  </p>
-                </div>
-                <div className="order-1 md:order-2 aspect-square relative rounded-xl shadow-2xl hover:shadow-3xl transition-shadow duration-300"> {/* Added aspect-square and relative for perfect square image */}
-                  <Image
-                    src={sec.img}
-                    fill
-                    alt={sec.title}
-                    className="object-cover rounded-xl"
-                  />
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="order-1 aspect-square relative rounded-xl shadow-2xl hover:shadow-3xl transition-shadow duration-300"> {/* Added aspect-square and relative for perfect square image */}
-                  <Image
-                    src={sec.img}
-                    fill
-                    alt={sec.title}
-                    className="object-cover rounded-xl"
-                  />
-                </div>
-                <div className="order-2">
-                  <h3 className="text-3xl md:text-4xl font-bold text-blue-900 mb-6">
-                    {sec.title}
-                  </h3>
-                  <p className="text-gray-700 text-lg leading-relaxed whitespace-pre-line">
-                    {sec.text}
-                  </p>
-                </div>
-              </>
-            )}
-          </div>
-        </section>
-      ))}
-
-      {/* ================= UPCOMING ================= */}
-      <section className="bg-slate-100 py-24">
+      {/* ================= COLLAGE GRID ================= */}
+      <section className="py-20 bg-slate-100">
         <div className="max-w-7xl mx-auto px-6">
-          <h2 className="text-3xl font-bold text-blue-900 mb-10">
-            आगामी विकास योजनाएँ
-          </h2>
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-blue-900">विकास कार्यों की झलक</h2>
+            <div className="h-1 w-24 bg-orange-500 mx-auto mt-4 rounded-full" />
+          </div>
 
-          <ul className="space-y-4 text-lg text-gray-700 list-disc list-inside">
-            <li>सौर ऊर्जा आधारित स्ट्रीट लाइट परियोजना</li>
-            <li>डिजिटल सेवा केंद्र का विस्तार</li>
-            <li>जल संरक्षण एवं वर्षा जल संचयन</li>
-            <li>कौशल विकास एवं स्वरोजगार प्रशिक्षण</li>
-            <li>शिक्षा एवं स्वास्थ्य सुविधाओं का सुदृढ़ीकरण</li>
-          </ul>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div className="col-span-2 row-span-2 relative aspect-square md:aspect-auto md:h-full rounded-3xl overflow-hidden shadow-lg">
+               <Image src="/images/ss1.png" fill alt="Work 1" className="object-cover hover:scale-110 transition-transform duration-700" />
+            </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden shadow-lg">
+               <Image src="/images/ss2.png" fill alt="Work 2" className="object-cover hover:scale-110 transition-transform duration-700" />
+            </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden shadow-lg">
+               <Image src="/images/ss3.png" fill alt="Work 3" className="object-cover hover:scale-110 transition-transform duration-700" />
+            </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden shadow-lg">
+               <Image src="/images/ss4.png" fill alt="Work 4" className="object-cover hover:scale-110 transition-transform duration-700" />
+            </div>
+            <div className="relative aspect-square rounded-3xl overflow-hidden shadow-lg">
+               <Image src="/images/ss5.png" fill alt="Work 5" className="object-cover hover:scale-110 transition-transform duration-700" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ================= FEATURE SECTIONS ================= */}
+      <div className="space-y-0">
+        {[
+          {
+            title: "सड़क एवं आधारभूत संरचना",
+            img: "/images/ss2.png",
+            color: "bg-white",
+            text: "पंचायत क्षेत्र में पक्की सड़कों और संपर्क मार्गों का जाल बिछाया गया है। सार्वजनिक भवनों एवं यातायात सुविधाओं के आधुनिकरण से व्यापार और आवागमन सुलभ हुआ है।"
+          },
+          {
+            title: "कृषि एवं सिंचाई विकास",
+            img: "/images/ss3.png",
+            color: "bg-slate-50",
+            text: "नहर आधारित सिंचाई व्यवस्था और मृदा परीक्षण केंद्रों के माध्यम से हम किसानों की आय दोगुनी करने के लक्ष्य पर कार्य कर रहे हैं।"
+          },
+          {
+            title: "स्वच्छता एवं पेयजल व्यवस्था",
+            img: "/images/ss4.png",
+            color: "bg-white",
+            text: "स्वच्छ भारत मिशन के तहत कचरा प्रबंधन और हर घर नल से जल पहुँचाने की योजना को सफलतापूर्वक लागू किया गया है।"
+          }
+        ].map((item, idx) => (
+          <section key={idx} className={`py-20 ${item.color}`}>
+            <div className={`max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center ${idx % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
+               <div className={`relative aspect-square max-w-md mx-auto w-full ${idx % 2 !== 0 ? 'md:order-2' : ''}`}>
+                  <Image src={item.img} fill alt={item.title} className="object-cover rounded-3xl shadow-2xl border-8 border-white" />
+               </div>
+               <div className={idx % 2 !== 0 ? 'md:order-1' : ''}>
+                  <div className="flex items-center gap-4 mb-4">
+                    <span className="text-5xl font-black text-blue-900/10">0{idx + 1}</span>
+                    <h3 className="text-3xl font-bold text-blue-900">{item.title}</h3>
+                  </div>
+                  <p className="text-lg text-gray-600 leading-relaxed mb-8">{item.text}</p>
+                  <button className="text-blue-700 font-bold flex items-center gap-2 hover:gap-4 transition-all">
+                    विस्तार से पढ़ें <span>→</span>
+                  </button>
+               </div>
+            </div>
+          </section>
+        ))}
+      </div>
+
+      {/* ================= UPCOMING PLANS ================= */}
+      <section className="py-24 bg-blue-900 text-white overflow-hidden relative">
+        <div className="absolute top-0 right-0 opacity-10 pointer-events-none">
+          <svg width="400" height="400" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="white" fill="transparent" strokeWidth="2"/></svg>
+        </div>
+        
+        <div className="max-w-7xl mx-auto px-6 relative z-10">
+          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+            <div>
+              <h2 className="text-orange-400 font-bold uppercase tracking-widest mb-2">भविष्य का विजन</h2>
+              <h3 className="text-4xl font-bold">आगामी विकास योजनाएँ</h3>
+            </div>
+            <p className="max-w-md text-blue-100">हम आने वाले समय में तकनीक और पर्यावरण के संतुलन के साथ पंचायत का कायाकल्प करने जा रहे हैं।</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[
+              { title: "सौर ऊर्जा", desc: "पूरे गांव में सौर ऊर्जा स्ट्रीट लाइट लगाना।" },
+              { title: "डिजिटल केंद्र", desc: "पूरी तरह से ऑनलाइन सेवा केंद्र का विस्तार।" },
+              { title: "कौशल विकास", desc: "युवाओं के लिए फ्री कंप्यूटर एवं सिलाई केंद्र।" },
+            ].map((plan, i) => (
+              <div key={i} className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all">
+                <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mb-6 font-bold text-xl">{i+1}</div>
+                <h4 className="text-xl font-bold mb-3">{plan.title}</h4>
+                <p className="text-blue-100">{plan.desc}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
       {/* ================= FOOTER ================= */}
-      <section className="bg-blue-900 text-white py-20">
-        <div className="max-w-5xl mx-auto px-6 text-center text-sm">
-          यह वेबसाइट एक सरकारी-शैली का स्थिर डिजिटल पोर्टल टेम्पलेट है,
-          जिसे कार्यालयीन प्रस्तुति एवं डेमो उद्देश्य हेतु विकसित किया गया है।
+      <footer className="bg-slate-900 text-slate-400 pt-20 pb-10">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12 mb-16">
+          <div>
+            <h4 className="text-white text-2xl font-bold mb-6">लॉंगवाला पंचायत</h4>
+            <p className="mb-6 leading-relaxed">श्रीगंगानगर, राजस्थान। <br /> नागरिकों के बेहतर भविष्य के लिए प्रतिबद्ध प्रशासनिक इकाई।</p>
+            <div className="flex gap-4">
+              <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-500 hover:text-white transition-all cursor-pointer">f</div>
+              <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-500 hover:text-white transition-all cursor-pointer">t</div>
+              <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-500 hover:text-white transition-all cursor-pointer">i</div>
+            </div>
+          </div>
+          <div>
+            <h4 className="text-white text-xl font-bold mb-6">त्वरित लिंक</h4>
+            <ul className="space-y-4">
+              <li><a href="#" className="hover:text-orange-500 transition-colors">महत्वपूर्ण दस्तावेज</a></li>
+              <li><a href="#" className="hover:text-orange-500 transition-colors">निविदाएं (Tenders)</a></li>
+              <li><a href="#" className="hover:text-orange-500 transition-colors">सरकारी योजनाएं</a></li>
+              <li><a href="#" className="hover:text-orange-500 transition-colors">शिकायत पंजीकरण</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4 className="text-white text-xl font-bold mb-6">संपर्क करें</h4>
+            <p className="mb-2">📍 पंचायत भवन, लॉंगवाला</p>
+            <p className="mb-2">📞 +91 00000 00000</p>
+            <p className="mb-2">✉️ info@longwala.gov.in</p>
+          </div>
         </div>
-      </section>
+        <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-slate-800 text-center text-sm">
+          <p>© 2024 ग्राम पंचायत लॉंगवाला. सर्वाधिकार सुरक्षित। यह एक डेमो पोर्टल है।</p>
+        </div>
+      </footer>
+
+      <style jsx global>{`
+        @keyframes marquee {
+          0% { transform: translateX(100%); }
+          100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+          display: inline-flex;
+          animation: marquee 25s linear infinite;
+        }
+      `}</style>
     </main>
   );
 }
