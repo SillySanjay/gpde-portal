@@ -121,7 +121,7 @@ export default function GeographyPage() {
 
         <div className="relative h-56 sm:h-72 md:h-96 rounded-lg overflow-hidden">
           <Image
-            src="/images/geo3.jpg"
+            src="/images/farm2.jpg"
             alt=""
             fill
             className="object-cover"

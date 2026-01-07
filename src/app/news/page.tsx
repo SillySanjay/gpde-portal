@@ -1,173 +1,195 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
+/* ================= BREAKING NEWS ================= */
+const breakingNews =
+  "📢 ग्राम सभा बैठक 18 अगस्त को आयोजित होगी | 💧 जल जीवन मिशन कार्य प्रगति पर | 🏗️ नई सड़क परियोजना स्वीकृत | 🌾 कृषि प्रशिक्षण शिविर आयोजित";
+
+/* ================= TOP NEWS ================= */
 const topNews = [
   {
-    title: "ग्राम सभा बैठक का आयोजन",
-    desc: "ग्राम पंचायत लॉंगवाला में आगामी ग्राम सभा बैठक का आयोजन किया जाएगा।",
-    date: "12 अगस्त 2024",
+    type: "video",
+    src: "/images/int1.mp4",
+    title: "ग्राम पंचायत में विकास कार्यों की समीक्षा बैठक",
+    date: "10 अगस्त 2025",
   },
   {
-    title: "मनरेगा के नए कार्य स्वीकृत",
-    desc: "मनरेगा अंतर्गत नए विकास कार्यों को स्वीकृति प्रदान की गई है।",
-    date: "05 अगस्त 2024",
+    type: "image",
+    src: "/images/eco1.jpg",
+    title: "स्वच्छ भारत अभियान के अंतर्गत विशेष सफाई कार्यक्रम",
+    date: "08 अगस्त 2025",
   },
   {
-    title: "स्वच्छता अभियान प्रारंभ",
-    desc: "पूरे ग्राम में स्वच्छता अभियान चलाया जाएगा।",
-    date: "01 अगस्त 2024",
+    type: "video",
+    src: "/images/int2.mp4",
+    title: "कृषि विभाग द्वारा किसानों के लिए प्रशिक्षण",
+    date: "05 अगस्त 2025",
   },
 ];
 
 export default function NewsPage() {
-  const [index, setIndex] = useState(0);
+  const [active, setActive] = useState(0);
 
+  /* AUTO SLIDE TOP NEWS */
   useEffect(() => {
-    const timer = setInterval(() => {
-      setIndex((p) => (p + 1) % topNews.length);
-    }, 4000);
-    return () => clearInterval(timer);
+    const t = setInterval(() => {
+      setActive((p) => (p + 1) % topNews.length);
+    }, 5000);
+    return () => clearInterval(t);
   }, []);
 
   return (
-    <main className="bg-slate-50 overflow-x-hidden">
+    <main className="bg-slate-50">
 
-      {/* HERO */}
-      <section className="bg-indigo-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3">
-            समाचार एवं सूचनाएँ
-          </h1>
-          <p className="text-base sm:text-lg opacity-90">
-            News, Notices & Announcements – Gram Panchayat Longwala
+      {/* ================= PAGE HEADER ================= */}
+      <section className="bg-blue-900 text-white py-16">
+        <div className="max-w-7xl mx-auto px-6">
+          <h1 className="text-4xl font-bold mb-2">समाचार एवं सूचनाएँ</h1>
+          <p className="opacity-90">
+            Gram Panchayat Longwala – News & Announcements
           </p>
         </div>
       </section>
 
-      {/* TOP NEWS SLIDER */}
-      <section className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-10">
-          <h2 className="text-xl sm:text-2xl font-bold text-indigo-900 mb-6">
+      {/* ================= BREAKING NEWS TICKER ================= */}
+      <section className="bg-yellow-100 border-y border-yellow-300 overflow-hidden">
+        <div className="whitespace-nowrap animate-marquee py-3 px-4 text-sm font-semibold text-yellow-900">
+          {breakingNews}
+        </div>
+      </section>
+
+      {/* ================= TOP NEWS SLIDER ================= */}
+      <section className="bg-white py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-blue-900 mb-8">
             प्रमुख समाचार
           </h2>
 
-          <div className="relative bg-indigo-50 p-5 sm:p-8 rounded-lg shadow">
-            <div className="mb-2 text-xs sm:text-sm text-gray-500">
-              {topNews[index].date}
-            </div>
-            <h3 className="text-lg sm:text-xl font-bold text-indigo-900 mb-2">
-              {topNews[index].title}
-            </h3>
-            <p className="text-sm sm:text-base text-gray-700">
-              {topNews[index].desc}
-            </p>
+          <div className="relative h-[420px] rounded-xl overflow-hidden shadow-lg">
+            {topNews.map((n, i) => (
+              <div
+                key={i}
+                className={`absolute inset-0 transition-opacity duration-1000 ${
+                  i === active ? "opacity-100 z-10" : "opacity-0 z-0"
+                }`}
+              >
+                {n.type === "video" ? (
+                  <video
+                    src={n.src}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <Image
+                    src={n.src}
+                    alt={n.title}
+                    fill
+                    className="object-cover"
+                  />
+                )}
+                <div className="absolute inset-0 bg-black/40" />
 
-            {/* SLIDER DOTS */}
-            <div className="flex gap-3 mt-6">
-              {topNews.map((_, i) => (
-                <span
-                  key={i}
-                  onClick={() => setIndex(i)}
-                  className={`h-3 w-3 rounded-full cursor-pointer transition ${
-                    i === index ? "bg-indigo-900" : "bg-indigo-300"
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* NOTICE BOARD */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
-        <h3 className="text-xl sm:text-2xl font-bold text-indigo-900 mb-8">
-          सूचना पट्ट (Notice Board)
-        </h3>
-
-        <div className="space-y-4">
-          {[
-            {
-              title: "ग्राम सभा बैठक सूचना",
-              date: "12 अगस्त 2024",
-              desc: "ग्राम सभा की बैठक पंचायत भवन में आयोजित की जाएगी।",
-            },
-            {
-              title: "मनरेगा कार्य प्रारंभ",
-              date: "05 अगस्त 2024",
-              desc: "मनरेगा अंतर्गत नए कार्यों की शुरुआत की गई है।",
-            },
-            {
-              title: "स्वच्छता अभियान",
-              date: "01 अगस्त 2024",
-              desc: "सभी ग्रामवासियों से अभियान में भाग लेने का अनुरोध।",
-            },
-          ].map((n, i) => (
-            <div
-              key={i}
-              className="bg-white border-l-4 border-indigo-900 p-5 sm:p-6 shadow rounded"
-            >
-              <div className="flex flex-col sm:flex-row sm:justify-between mb-2">
-                <h4 className="font-bold text-gray-800">
-                  {n.title}
-                </h4>
-                <span className="text-xs sm:text-sm text-gray-500">
-                  {n.date}
-                </span>
+                <div className="absolute bottom-0 left-0 p-6 text-white">
+                  <p className="text-sm opacity-80">{n.date}</p>
+                  <h3 className="text-2xl font-bold max-w-2xl">
+                    {n.title}
+                  </h3>
+                </div>
               </div>
-              <p className="text-sm text-gray-700">{n.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+            ))}
+          </div>
 
-      {/* OFFICIAL CIRCULARS */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
-          <h3 className="text-xl sm:text-2xl font-bold text-indigo-900 mb-8">
-            परिपत्र एवं आदेश
-          </h3>
-
-          <div className="overflow-x-auto">
-            <table className="min-w-[650px] w-full border text-sm">
-              <thead className="bg-indigo-900 text-white">
-                <tr>
-                  <th className="p-4 text-left">क्रमांक</th>
-                  <th className="p-4 text-left">विषय</th>
-                  <th className="p-4 text-left">जारी तिथि</th>
-                  <th className="p-4 text-left">स्थिति</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr className="border-b">
-                  <td className="p-4">01</td>
-                  <td className="p-4">प्रधानमंत्री आवास योजना</td>
-                  <td className="p-4">28 जुलाई 2024</td>
-                  <td className="p-4 text-green-600 font-semibold">सक्रिय</td>
-                </tr>
-                <tr className="border-b">
-                  <td className="p-4">02</td>
-                  <td className="p-4">कृषि बीज वितरण</td>
-                  <td className="p-4">22 जुलाई 2024</td>
-                  <td className="p-4 text-green-600 font-semibold">सक्रिय</td>
-                </tr>
-                <tr>
-                  <td className="p-4">03</td>
-                  <td className="p-4">पेंशन सत्यापन</td>
-                  <td className="p-4">15 जुलाई 2024</td>
-                  <td className="p-4 text-red-600 font-semibold">समाप्त</td>
-                </tr>
-              </tbody>
-            </table>
+          {/* DOTS */}
+          <div className="flex gap-3 justify-center mt-6">
+            {topNews.map((_, i) => (
+              <span
+                key={i}
+                onClick={() => setActive(i)}
+                className={`h-3 w-3 rounded-full cursor-pointer ${
+                  i === active ? "bg-blue-900" : "bg-blue-300"
+                }`}
+              />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* FOOTER NOTE */}
-      <section className="bg-indigo-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-14 text-center">
-          <p className="max-w-3xl mx-auto text-sm sm:text-base">
-            सभी समाचार एवं सूचनाएँ ग्राम पंचायत लॉंगवाला द्वारा आधिकारिक रूप से जारी की जाती हैं।
+      {/* ================= LATEST NEWS GRID ================= */}
+      <section className="py-20">
+        <div className="max-w-7xl mx-auto px-6">
+          <h2 className="text-3xl font-bold text-blue-900 mb-10">
+            नवीनतम अपडेट
+          </h2>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {[
+              {
+                title: "मनरेगा के अंतर्गत नए कार्य प्रारंभ",
+                date: "04 अगस्त 2025",
+                image: "/images/eco2.jpg",
+              },
+              {
+                title: "विद्यालय में नामांकन अभियान",
+                date: "02 अगस्त 2025",
+                image: "/images/eco3.jpg",
+              },
+              {
+                title: "स्वास्थ्य विभाग द्वारा शिविर",
+                date: "01 अगस्त 2025",
+                image: "/images/eco1.jpg",
+              },
+              {
+                title: "पेयजल आपूर्ति व्यवस्था सुदृढ़",
+                date: "30 जुलाई 2025",
+                image: "/images/eco2.jpg",
+              },
+              {
+                title: "महिला स्वयं सहायता समूह बैठक",
+                date: "28 जुलाई 2025",
+                image: "/images/eco3.jpg",
+              },
+              {
+                title: "डिजिटल सेवा केंद्र प्रारंभ",
+                date: "25 जुलाई 2025",
+                image: "/images/eco1.jpg",
+              },
+            ].map((n, i) => (
+              <div
+                key={i}
+                className="bg-white rounded-xl overflow-hidden shadow hover:shadow-lg transition animate-fadeUp"
+              >
+                <div className="relative h-48">
+                  <Image
+                    src={n.image}
+                    alt={n.title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="p-5">
+                  <p className="text-xs text-gray-500 mb-1">{n.date}</p>
+                  <h3 className="font-semibold text-gray-800 leading-snug">
+                    {n.title}
+                  </h3>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ================= OFFICIAL NOTE ================= */}
+      <section className="bg-blue-900 text-white py-14">
+        <div className="max-w-5xl mx-auto px-6 text-center text-sm leading-relaxed">
+          <p>
+            यह समाचार अनुभाग ग्राम पंचायत लॉंगवाला द्वारा
+            जारी आधिकारिक सूचनाओं एवं घोषणाओं को
+            डिजिटल माध्यम से प्रस्तुत करता है।
           </p>
         </div>
       </section>

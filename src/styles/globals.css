@@ -22,6 +22,10 @@ body {
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+/* globals.css */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
 
 /* ---------------- SCROLL REVEAL ---------------- */
 .reveal {
@@ -105,3 +109,14 @@ section {
 .animate-scaleIn {
   animation: scaleIn 0.7s ease forwards;
 }
+
+
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  animation: marquee 18s linear infinite;
+}
+

@@ -38,7 +38,7 @@ export default function GalleryPage() {
         </h3>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {["eco1", "eco2", "eco3", "eco1"].map((img, i) => (
+          {["dev", "dev2", "dev3", "eco1"].map((img, i) => (
             <Image
               key={i}
               src={`/images/${img}.jpg`}
@@ -59,7 +59,7 @@ export default function GalleryPage() {
           </h3>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {["eco2", "eco3", "eco1"].map((img, i) => (
+            {["irri2", "irri5", "irri3"].map((img, i) => (
               <Image
                 key={i}
                 src={`/images/${img}.jpg`}
@@ -82,12 +82,12 @@ export default function GalleryPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {[
             {
-              img: "eco1",
+              img: "sch1",
               title: "सरकारी योजनाओं का क्रियान्वयन",
               text: "ग्राम पंचायत द्वारा पात्र नागरिकों को योजनाओं का लाभ।",
             },
             {
-              img: "eco2",
+              img: "sch2",
               title: "ग्रामीण विकास कार्यक्रम",
               text: "आधारभूत संरचना एवं विकास कार्य।",
             },
@@ -118,30 +118,38 @@ export default function GalleryPage() {
 
       {/* VIDEO GALLERY */}
       <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
-          <h3 className="text-xl sm:text-2xl font-bold text-purple-900 mb-6">
-            वीडियो गैलरी
-          </h3>
+  <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
+    <h3 className="text-xl sm:text-2xl font-bold text-purple-900 mb-6">
+      वीडियो गैलरी
+    </h3>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[1, 2, 3].map((_, i) => (
-              <div
-                key={i}
-                className="relative h-48 sm:h-56 rounded-lg overflow-hidden shadow"
-              >
-                <video
-                  src="/images/video.mp4"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {[
+        "/images/vil1.mp4",
+        "/images/vil2.mp4",
+        "/images/vil3.mp4",
+      ].map((src, i) => (
+        <div
+          key={i}
+          className="relative h-48 sm:h-56 rounded-xl overflow-hidden shadow-lg group"
+        >
+          <video
+            src={src}
+            autoPlay
+            muted
+            loop
+            playsInline
+            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+
+          {/* Optional overlay */}
+          <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition" />
         </div>
-      </section>
+      ))}
+    </div>
+  </div>
+</section>
+
 
       {/* FOOTER NOTE */}
       <section className="bg-purple-900 text-white">

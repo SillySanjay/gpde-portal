@@ -1,14 +1,11 @@
-export default function Header() {
+"use client";
+
+export default function NewsTicker() {
   return (
-    <header className="bg-blue-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 py-2 text-center">
-        <p className="text-[11px] sm:text-sm font-semibold tracking-wide">
-          राजस्थान सरकार | Government of Rajasthan
-        </p>
-        <p className="text-sm sm:text-lg font-bold mt-1">
-          ग्राम पंचायत लॉंगवाला | Gram Panchayat Longwala
-        </p>
+    <div className="overflow-hidden bg-blue-900 text-white py-2">
+      <div className="whitespace-nowrap animate-marquee px-4">
+        📰 ग्राम सभा बैठक 12 अगस्त को होगी • 💧 जल संरक्षण अभियान प्रारंभ • 🌾 नई कृषि योजना लागू • 🏗️ सड़क निर्माण कार्य स्वीकृत
       </div>
-    </header>
+    </div>
   );
 }
