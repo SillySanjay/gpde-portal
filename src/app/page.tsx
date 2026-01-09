@@ -1,294 +1,306 @@
 "use client";
-
+import { useState, useEffect } from "react";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import Link from "next/link";
+import { motion, AnimatePresence } from "framer-motion";
+import { 
+  ShieldCheck, Wifi, Landmark, ArrowRight, Zap, 
+  Users, CheckCircle2, Megaphone, FileText, Globe, Menu, X, Target, Info, Phone, Activity
+} from "lucide-react";
 
-/* =========================================================
-   HOME PAGE – GOVERNMENT STYLE | REFINED & RESPONSIVE
-   ========================================================= */
-
-const heroSlides = [
-  "/images/ss1.png",
-  "/images/ss2.png",
-  "/images/ss3.png",
-  "/images/ss4.png",
-  "/images/ss5.png",
-];
-
-const stats = [
-  { label: "कुल जनसंख्या", value: "5,000+" },
-  { label: "कुल वार्ड", value: "11" },
-  { label: "साक्षरता दर", value: "78%" },
-  { label: "क्षेत्रफल (हे.)", value: "1240" },
+const carouselPhotos = [
+  "/images/WhatsApp Image 2026-01-08 at 10.57.12 AM.jpeg",
+  "/images/one.jpeg",
+  "/images/two.jpeg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774292/WhatsApp_Image_2026-01-07_at_12.47.56_PM_bf7ubr.jpg",
 ];
 
 export default function HomePage() {
-  const [active, setActive] = useState(0);
+  const [index, setIndex] = useState(0);
+  const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   useEffect(() => {
-    const t = setInterval(() => {
-      setActive((p) => (p + 1) % heroSlides.length);
-    }, 5000);
-    return () => clearInterval(t);
+    const timer = setInterval(() => setIndex((p) => (p + 1) % carouselPhotos.length), 5000);
+    return () => clearInterval(timer);
   }, []);
 
+  const navLinks = ['Home', 'Geography', 'History', 'Economy', 'Gallery', 'News'];
+
   return (
-    <main className="bg-slate-50 overflow-x-hidden font-sans">
+    <main className="bg-white font-sans text-slate-900 leading-relaxed antialiased overflow-x-hidden">
       
-      {/* ================= NEWS TICKER ================= */}
-      <div className="bg-orange-600 text-white py-2 overflow-hidden whitespace-nowrap relative z-30">
-        <div className="flex animate-marquee">
-          <span className="mx-4 text-sm md:text-base font-medium">
-            सूचना: ग्राम सभा की अगली बैठक 15 जनवरी को पंचायत भवन में आयोजित की जाएगी।
-          </span>
-          <span className="mx-4 text-sm md:text-base font-medium">
-            • प्रधानमंत्री आवास योजना की नई सूची जारी हो चुकी है।
-          </span>
-          <span className="mx-4 text-sm md:text-base font-medium">
-            • स्वच्छ भारत अभियान के तहत कचरा प्रबंधन में सहयोग करें।
-          </span>
+      
+
+      {/* 2. GOVERNMENT CAROUSEL */}
+      <section className="relative w-full overflow-hidden bg-slate-900 h-[45vh] md:h-[50vh] lg:h-[700px]">
+        <AnimatePresence mode="wait">
+          <motion.div key={index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1 }} className="absolute inset-0 h-full w-full">
+            <Image src={carouselPhotos[index]} fill alt="Slider" className="object-cover object-center" priority />
+            <div className="absolute inset-0 bg-black/40" />
+          </motion.div>
+        </AnimatePresence>
+        <div className="absolute inset-0 flex items-center justify-center text-center px-6">
+          <motion.div initial={{ y: 20, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ delay: 0.5 }} className="max-w-4xl">
+            <h1 className="text-3xl md:text-5xl lg:text-7xl font-black text-white uppercase tracking-tight mb-4 drop-shadow-2xl">Punsari Gram Panchayat</h1>
+            <p className="text-white text-[10px] md:text-xs lg:text-lg font-bold uppercase tracking-[4px] md:tracking-[6px] bg-orange-600 px-4 lg:px-6 py-2 inline-block">India&apos;s No.1 Model Village</p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* 3. FIXED DUAL NEWS STRIP */}
+      <div className="bg-blue-800 text-white flex flex-col md:flex-row border-b-4 border-orange-500 divide-y md:divide-y-0 md:divide-x divide-white/20">
+        <div className="relative flex-1 flex items-center h-12 overflow-hidden">
+          <div className="absolute left-0 top-0 bottom-0 bg-orange-600 z-10 flex items-center px-4 font-black uppercase text-[10px] tracking-widest shadow-xl shrink-0">News</div>
+          <div className="animate-marquee whitespace-nowrap text-[11px] font-medium italic uppercase tracking-wider pl-[100px] md:pl-[120px]">
+            📢 ISO 9001:2026 Certification Awarded • RO Plant Upgrade Completed • New Piped Water Line in Ward 4 • Financial Surplus: ₹75 Lakh
+          </div>
+        </div>
+        <div className="relative flex-1 flex items-center h-12 overflow-hidden">
+          <div className="absolute left-0 top-0 bottom-0 bg-blue-950 z-10 flex items-center px-4 font-black uppercase text-[10px] tracking-widest shadow-xl shrink-0">Events</div>
+          <div className="animate-marquee whitespace-nowrap text-[11px] font-medium italic uppercase tracking-wider pl-[100px] md:pl-[120px]">
+            📢 Gram Sabha Meeting: Feb 15th, 2026 at 10 AM • Skill Center Convocation • Women Dairy Cooperative Meet
+          </div>
         </div>
       </div>
 
-      {/* ================= HERO SECTION ================= */}
-      <section className="relative h-[70vh] md:h-[85vh] w-full overflow-hidden">
-        {heroSlides.map((slide, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === active ? "opacity-100" : "opacity-0"
-            }`}
-          >
-            <Image
-              src={slide}
-              fill
-              priority={index === 0}
-              alt={`Slide ${index}`}
-              className="object-cover"
-            />
-            {/* Darker gradient for better text readability */}
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 to-transparent md:from-blue-900/60" />
-          </div>
-        ))}
-
-        <div className="relative z-20 h-full max-w-7xl mx-auto px-6 flex flex-col justify-center">
-          <div className="max-w-2xl text-white">
-            <span className="inline-block px-4 py-1 bg-orange-500 text-xs font-bold tracking-widest uppercase rounded mb-4">
-              आधिकारिक पोर्टल
-            </span>
-            <h1 className="text-4xl md:text-7xl font-extrabold mb-6 leading-tight drop-shadow-xl">
-              ग्राम पंचायत <br />
-              <span className="text-orange-400">लॉंगवाला</span>
-            </h1>
-            <p className="text-lg md:text-2xl text-slate-100 mb-8 leading-relaxed drop-shadow-md">
-              विकास, पारदर्शिता एवं सुशासन के प्रति समर्पित। हम मिलकर बना रहे हैं एक आदर्श और डिजिटल ग्राम पंचायत।
+      {/* 4. VISION & MISSION */}
+      <section className="py-12 md:py-16 bg-white border-b">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-8 md:gap-12 items-center">
+          <div className="space-y-6">
+            <div className="flex items-center gap-2 text-orange-600">
+               <Target size={24}/>
+               <span className="font-black uppercase tracking-[4px] text-xs">The Punsari Blueprint</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-black text-blue-900 leading-tight uppercase italic">"Urban Facilities, Rural Soul"</h2>
+            <p className="text-slate-600 leading-relaxed text-justify italic font-medium text-sm md:text-base">
+              Punsari represents the transformation of rural India. Under the vision of making villages self-reliant, we have integrated high-tech surveillance, 100% digital literacy, and urban-standard education while maintaining our cultural roots.
             </p>
-            <div className="flex flex-wrap gap-4">
-              <button className="bg-white text-blue-900 px-8 py-3 rounded-full font-bold hover:bg-orange-500 hover:text-white transition-all shadow-lg">
-                विकास कार्य देखें
-              </button>
-              <button className="border-2 border-white text-white px-8 py-3 rounded-full font-bold hover:bg-white/10 transition-all">
-                संपर्क करें
-              </button>
-            </div>
+            <button className="flex items-center gap-2 text-blue-900 font-black text-xs uppercase tracking-widest group">
+              View Development Plan <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform"/>
+            </button>
           </div>
-        </div>
-
-        {/* Carousel Indicators */}
-        <div className="absolute bottom-10 right-10 z-20 flex gap-2">
-          {heroSlides.map((_, i) => (
-            <button
-              key={i}
-              onClick={() => setActive(i)}
-              className={`h-2 transition-all rounded-full ${
-                active === i ? "w-10 bg-orange-500" : "w-4 bg-white/50"
-              }`}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* ================= QUICK STATS ================= */}
-      <section className="relative z-30 -mt-12 max-w-6xl mx-auto px-4">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-          {stats.map((stat, i) => (
-            <div key={i} className="bg-white p-6 rounded-2xl shadow-xl text-center border-b-4 border-blue-900 transform hover:-translate-y-1 transition-transform">
-              <div className="text-2xl md:text-4xl font-black text-blue-900 mb-1">{stat.value}</div>
-              <div className="text-gray-500 text-sm md:text-base font-medium">{stat.label}</div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ================= INTRODUCTION ================= */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-blue-900 text-sm font-bold uppercase tracking-widest mb-3">स्वागतम</h2>
-            <h3 className="text-3xl md:text-5xl font-bold text-slate-900 mb-6">
-              ग्राम पंचायत का परिचय एवं <span className="text-blue-700">उद्देश्य</span>
-            </h3>
-            <div className="space-y-4 text-gray-600 text-lg leading-relaxed text-justify">
-              <p>
-                ग्राम पंचायत लॉंगवाला राजस्थान के श्रीगंगानगर जिले की एक प्रमुख पंचायत है। यह डिजिटल पोर्टल नागरिकों को सरकारी योजनाओं, विकास कार्यों और प्रशासनिक निर्णयों से सीधे जोड़ने का एक सशक्त माध्यम है।
-              </p>
-              <p>
-                हमारा लक्ष्य 100% साक्षरता, आधुनिक कृषि तकनीक, और उन्नत स्वास्थ्य सुविधाएँ उपलब्ध कराना है। पंचायत भारतीय संविधान के 73वें संशोधन के अनुरूप पारदर्शिता और जवाबदेही के साथ कार्य कर रही है।
-              </p>
-            </div>
-          </div>
-          <div className="relative group">
-            <div className="absolute -inset-4 bg-orange-100 rounded-2xl -rotate-2 group-hover:rotate-0 transition-transform duration-500" />
-            <div className="relative aspect-square rounded-2xl overflow-hidden shadow-2xl">
-              <Image src="/images/ss1.png" fill alt="About Panchayat" className="object-cover" />
-            </div>
+          <div className="grid grid-cols-2 gap-3 md:gap-4">
+             <div className="bg-slate-50 p-4 md:p-6 rounded-2xl border-l-4 border-orange-500">
+                <ShieldCheck className="text-blue-900 mb-2"/>
+                <h4 className="font-black uppercase text-[10px] md:text-xs">Security</h4>
+                <p className="text-[8px] md:text-[10px] text-slate-500 uppercase mt-1">120+ CCTV Cameras</p>
+             </div>
+             <div className="bg-slate-900 p-4 md:p-6 rounded-2xl text-white">
+                <Wifi className="text-orange-500 mb-2"/>
+                <h4 className="font-black uppercase text-[10px] md:text-xs">Digital</h4>
+                <p className="text-[8px] md:text-[10px] opacity-60 uppercase mt-1">Village-wide Wi-Fi</p>
+             </div>
+             <div className="bg-blue-900 p-4 md:p-6 rounded-2xl text-white">
+                <CheckCircle2 className="text-orange-500 mb-2"/>
+                <h4 className="font-black uppercase text-[10px] md:text-xs">Sanitation</h4>
+                <p className="text-[8px] md:text-[10px] opacity-60 uppercase mt-1">100% Waste Mgmt</p>
+             </div>
+             <div className="bg-slate-50 p-4 md:p-6 rounded-2xl border-l-4 border-blue-900">
+                <Info className="text-blue-900 mb-2"/>
+                <h4 className="font-black uppercase text-[10px] md:text-xs">Services</h4>
+                <p className="text-[8px] md:text-[10px] text-slate-500 uppercase mt-1">24/7 RO Water</p>
+             </div>
           </div>
         </div>
       </section>
 
-      {/* ================= COLLAGE GRID ================= */}
-      <section className="py-20 bg-slate-100">
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold text-blue-900">विकास कार्यों की झलक</h2>
-            <div className="h-1 w-24 bg-orange-500 mx-auto mt-4 rounded-full" />
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div className="col-span-2 row-span-2 relative aspect-square md:aspect-auto md:h-full rounded-3xl overflow-hidden shadow-lg">
-               <Image src="/images/ss1.png" fill alt="Work 1" className="object-cover hover:scale-110 transition-transform duration-700" />
-            </div>
-            <div className="relative aspect-square rounded-3xl overflow-hidden shadow-lg">
-               <Image src="/images/ss2.png" fill alt="Work 2" className="object-cover hover:scale-110 transition-transform duration-700" />
-            </div>
-            <div className="relative aspect-square rounded-3xl overflow-hidden shadow-lg">
-               <Image src="/images/ss3.png" fill alt="Work 3" className="object-cover hover:scale-110 transition-transform duration-700" />
-            </div>
-            <div className="relative aspect-square rounded-3xl overflow-hidden shadow-lg">
-               <Image src="/images/ss4.png" fill alt="Work 4" className="object-cover hover:scale-110 transition-transform duration-700" />
-            </div>
-            <div className="relative aspect-square rounded-3xl overflow-hidden shadow-lg">
-               <Image src="/images/ss5.png" fill alt="Work 5" className="object-cover hover:scale-110 transition-transform duration-700" />
-            </div>
+      {/* 7. IMAGE GRAPHIC SECTION */}
+      <section className="bg-slate-50 py-12 md:py-16 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="relative w-full aspect-[14/11] md:aspect-[15/10] bg-white p-4 shadow-xl rounded-xl">
+             <Image 
+               src="https://res.cloudinary.com/dpccapers/image/upload/v1767785378/ChatGPT_Image_Jan_7_2026_04_59_09_PM_zlfefj.png" 
+               fill 
+               alt="Digital Ecosystem Overview" 
+               className="object-contain p-4 md:p-8"
+             />
           </div>
         </div>
       </section>
 
-      {/* ================= FEATURE SECTIONS ================= */}
-      <div className="space-y-0">
-        {[
-          {
-            title: "सड़क एवं आधारभूत संरचना",
-            img: "/images/ss2.png",
-            color: "bg-white",
-            text: "पंचायत क्षेत्र में पक्की सड़कों और संपर्क मार्गों का जाल बिछाया गया है। सार्वजनिक भवनों एवं यातायात सुविधाओं के आधुनिकरण से व्यापार और आवागमन सुलभ हुआ है।"
-          },
-          {
-            title: "कृषि एवं सिंचाई विकास",
-            img: "/images/ss3.png",
-            color: "bg-slate-50",
-            text: "नहर आधारित सिंचाई व्यवस्था और मृदा परीक्षण केंद्रों के माध्यम से हम किसानों की आय दोगुनी करने के लक्ष्य पर कार्य कर रहे हैं।"
-          },
-          {
-            title: "स्वच्छता एवं पेयजल व्यवस्था",
-            img: "/images/ss4.png",
-            color: "bg-white",
-            text: "स्वच्छ भारत मिशन के तहत कचरा प्रबंधन और हर घर नल से जल पहुँचाने की योजना को सफलतापूर्वक लागू किया गया है।"
-          }
-        ].map((item, idx) => (
-          <section key={idx} className={`py-20 ${item.color}`}>
-            <div className={`max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center ${idx % 2 !== 0 ? 'md:flex-row-reverse' : ''}`}>
-               <div className={`relative aspect-square max-w-md mx-auto w-full ${idx % 2 !== 0 ? 'md:order-2' : ''}`}>
-                  <Image src={item.img} fill alt={item.title} className="object-cover rounded-3xl shadow-2xl border-8 border-white" />
-               </div>
-               <div className={idx % 2 !== 0 ? 'md:order-1' : ''}>
-                  <div className="flex items-center gap-4 mb-4">
-                    <span className="text-5xl font-black text-blue-900/10">0{idx + 1}</span>
-                    <h3 className="text-3xl font-bold text-blue-900">{item.title}</h3>
-                  </div>
-                  <p className="text-lg text-gray-600 leading-relaxed mb-8">{item.text}</p>
-                  <button className="text-blue-700 font-bold flex items-center gap-2 hover:gap-4 transition-all">
-                    विस्तार से पढ़ें <span>→</span>
-                  </button>
-               </div>
-            </div>
-          </section>
-        ))}
-      </div>
-
-      {/* ================= UPCOMING PLANS ================= */}
-      <section className="py-24 bg-blue-900 text-white overflow-hidden relative">
-        <div className="absolute top-0 right-0 opacity-10 pointer-events-none">
-          <svg width="400" height="400" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="white" fill="transparent" strokeWidth="2"/></svg>
-        </div>
-        
-        <div className="max-w-7xl mx-auto px-6 relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
-            <div>
-              <h2 className="text-orange-400 font-bold uppercase tracking-widest mb-2">भविष्य का विजन</h2>
-              <h3 className="text-4xl font-bold">आगामी विकास योजनाएँ</h3>
-            </div>
-            <p className="max-w-md text-blue-100">हम आने वाले समय में तकनीक और पर्यावरण के संतुलन के साथ पंचायत का कायाकल्प करने जा रहे हैं।</p>
+      {/* 6. GOVERNANCE PILLARS */}
+      <section className="py-16 md:py-24 bg-white px-6 border-y">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12 md:mb-16">
+            <h3 className="text-blue-900 text-2xl md:text-3xl font-black uppercase tracking-tighter italic">Pillars of Governance</h3>
+            <p className="text-slate-400 text-[10px] font-bold uppercase tracking-[4px] mt-2">Professional Rural Management Strategy</p>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-8 md:gap-12">
             {[
-              { title: "सौर ऊर्जा", desc: "पूरे गांव में सौर ऊर्जा स्ट्रीट लाइट लगाना।" },
-              { title: "डिजिटल केंद्र", desc: "पूरी तरह से ऑनलाइन सेवा केंद्र का विस्तार।" },
-              { title: "कौशल विकास", desc: "युवाओं के लिए फ्री कंप्यूटर एवं सिलाई केंद्र।" },
-            ].map((plan, i) => (
-              <div key={i} className="bg-white/10 backdrop-blur-md p-8 rounded-2xl border border-white/20 hover:bg-white/20 transition-all">
-                <div className="w-12 h-12 bg-orange-500 rounded-full flex items-center justify-center mb-6 font-bold text-xl">{i+1}</div>
-                <h4 className="text-xl font-bold mb-3">{plan.title}</h4>
-                <p className="text-blue-100">{plan.desc}</p>
+              { title: "Financial Independence", desc: "Generating revenue via land auctions and tax collection to fund local maintenance without state grants." },
+              { title: "Digital Transparency", desc: "CCTV surveillance and digital attendance for school teachers ensure 100% accountability." },
+              { title: "Social Inclusion", desc: "Empowering women through 111+ Sakhi Mandals and a fully functional village-wide audio system." }
+            ].map((pillar, i) => (
+              <div key={i} className="space-y-4 border-t-2 border-slate-100 pt-8">
+                <span className="text-orange-600 font-black text-xl md:text-2xl">0{i+1}</span>
+                <h4 className="font-black uppercase text-xs md:text-sm tracking-widest text-blue-900">{pillar.title}</h4>
+                <p className="text-slate-500 text-[11px] md:text-xs leading-relaxed italic">{pillar.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* ================= FOOTER ================= */}
-      <footer className="bg-slate-900 text-slate-400 pt-20 pb-10">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-12 mb-16">
-          <div>
-            <h4 className="text-white text-2xl font-bold mb-6">लॉंगवाला पंचायत</h4>
-            <p className="mb-6 leading-relaxed">श्रीगंगानगर, राजस्थान। <br /> नागरिकों के बेहतर भविष्य के लिए प्रतिबद्ध प्रशासनिक इकाई।</p>
-            <div className="flex gap-4">
-              <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-500 hover:text-white transition-all cursor-pointer">f</div>
-              <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-500 hover:text-white transition-all cursor-pointer">t</div>
-              <div className="w-10 h-10 rounded-full bg-slate-800 flex items-center justify-center hover:bg-orange-500 hover:text-white transition-all cursor-pointer">i</div>
+      {/* 5. CORE STATISTICS */}
+      <section className="py-12 md:py-20 bg-slate-50 px-6">
+        <div className="max-w-7xl mx-auto grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
+          {[
+            { label: "Village Population", val: "6,000", icon: <Users size={20}/> },
+            { label: "Digital Literacy", val: "100%", icon: <Wifi size={20}/> },
+            { label: "Sakhi Mandals", val: "111+", icon: <ShieldCheck size={20}/> },
+            { label: "Revenue Surplus", val: "₹75L+", icon: <Landmark size={20}/> },
+          ].map((item, i) => (
+            <div key={i} className="bg-white border border-slate-200 p-6 md:p-8 text-center flex flex-col items-center group hover:bg-blue-900 transition-all hover:text-white shadow-sm">
+              <div className="text-orange-600 group-hover:text-white mb-4"><CheckCircle2 size={24}/></div>
+              <div className="text-2xl md:text-4xl font-black">{item.val}</div>
+              <div className="text-[9px] md:text-[10px] uppercase font-black tracking-widest opacity-50 mt-1">{item.label}</div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* FILLING THE GAP: QUICK CITIZEN SERVICES */}
+      <section className="bg-blue-900 py-10 px-6 text-white overflow-hidden relative">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
+          <div className="flex items-center gap-4">
+            <Activity className="text-orange-500 hidden sm:block" size={40} />
+            <div>
+              <h4 className="text-xl font-black uppercase italic tracking-tighter">Citizen Quick Access</h4>
+              <p className="text-[10px] uppercase font-bold text-blue-300 tracking-[3px]">Digital Services & Support Helplines</p>
             </div>
           </div>
-          <div>
-            <h4 className="text-white text-xl font-bold mb-6">त्वरित लिंक</h4>
-            <ul className="space-y-4">
-              <li><a href="#" className="hover:text-orange-500 transition-colors">महत्वपूर्ण दस्तावेज</a></li>
-              <li><a href="#" className="hover:text-orange-500 transition-colors">निविदाएं (Tenders)</a></li>
-              <li><a href="#" className="hover:text-orange-500 transition-colors">सरकारी योजनाएं</a></li>
-              <li><a href="#" className="hover:text-orange-500 transition-colors">शिकायत पंजीकरण</a></li>
+          <div className="flex flex-wrap justify-center gap-4">
+            {['E-Gram Portal', 'Dairy Login', 'Tax Payment', 'School Login'].map((btn) => (
+              <button key={btn} className="px-4 py-2 border border-white/20 rounded-md text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-blue-900 transition-all">
+                {btn}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="absolute top-0 right-0 opacity-10 translate-x-1/4 -translate-y-1/4">
+          <Landmark size={240} />
+        </div>
+      </section>
+
+      {/* 8. GROWTH MODELS TILES */}
+      <section className="py-16 md:py-24 bg-white px-6 border-y border-slate-200">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-center text-2xl md:text-3xl font-black text-blue-900 uppercase mb-12 md:mb-16 tracking-tight">Applied Growth Models</h2>
+          <div className="grid md:grid-cols-3 gap-4 md:gap-1 ">
+             {[
+               { title: "PURA Model", desc: "Provision of Urban Amenities in Rural Areas focusing on Physical, Electronic, and Economic connectivity." },
+               { title: "Hub & Spoke", desc: "Information empowerment ensuring data reaches citizens via Wi-Fi and Public Address networks." },
+               { title: "Gandhian Vision", desc: "Self-governance as a complete republic, independent for vital wants yet interdependent for growth." }
+             ].map((m, i) => (
+               <div key={i} className="bg-white p-8 md:p-12 border border-slate-200 hover:border-blue-900 transition-all group">
+                 <h4 className="text-lg md:text-xl font-black text-slate-900 mb-4 uppercase italic">{m.title}</h4>
+                 <p className="text-xs md:text-sm text-slate-500 leading-relaxed text-justify italic">{m.desc}</p>
+               </div>
+             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 9. DIGITAL SMART SCHOOLS */}
+      <section className="relative py-24 md:py-32 px-6 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+           <Image 
+             src="https://res.cloudinary.com/dpccapers/image/upload/v1767774287/WhatsApp_Image_2026-01-07_at_12.47.44_PM_1_toy9rh.jpg" 
+             fill alt="School Background" 
+             className="object-cover"
+           />
+           <div className="absolute inset-0 bg-blue-950/40" />
+        </div>
+        <div className="relative z-10 max-w-7xl mx-auto">
+          <div className="text-center mb-16 md:mb-20 text-white">
+            <h2 className="text-3xl md:text-6xl font-black uppercase tracking-tighter italic leading-none">Digital <span className="text-orange-500 underline">Smart</span> Schools</h2>
+            <p className="mt-4 text-slate-300 font-bold uppercase tracking-[4px] text-[10px] md:text-xs">Transforming the Primary Learning Landscape</p>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8">
+            {[
+              { title: "E-Sense Modules", desc: "Collaboration with Navneet Publications to provide audio-visual teaching modules in every classroom." },
+              { title: "Student Logistics", desc: "Individual lockers provided to reduce bag weight. Free transport via the Atal Express bus system." },
+              { title: "Skill Training", desc: "Dedicated center for school dropouts covering computer operations, tailoring, and embroidery." }
+            ].map((box, i) => (
+              <div key={i} className="bg-white/10 backdrop-blur-md border border-white/20 p-8 md:p-10 rounded-xl text-white hover:bg-white/20 transition-all shadow-2xl">
+                 <h4 className="text-lg md:text-xl font-black uppercase mb-4 italic text-orange-400">{box.title}</h4>
+                 <p className="text-xs md:text-sm opacity-80 leading-relaxed font-medium">{box.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 10. INSTITUTIONAL EXCELLENCE */}
+      <section className="py-16 md:py-24 max-w-7xl mx-auto px-6">
+        <div className="grid lg:grid-cols-3 gap-12 lg:gap-16">
+          <div className="lg:col-span-2">
+            <h2 className="text-2xl md:text-3xl font-black text-blue-900 border-b-4 border-orange-500 pb-2 inline-block uppercase italic">Institutional Excellence</h2>
+            <p className="mt-8 text-slate-600 leading-relaxed text-justify italic font-medium text-sm md:text-base">
+              "Development is not a destination but a continuous process of change." Documented by NIRDPR, Punsari Gram Panchayat has operationalized decentralization through professional management.
+            </p>
+            <div className="grid md:grid-cols-2 gap-6 md:gap-8 mt-12 text-sm">
+              <div className="p-6 md:p-8 border border-slate-200 bg-slate-50">
+                 <h4 className="font-black text-blue-900 uppercase mb-4 text-[10px] md:text-xs tracking-widest underline decoration-orange-500">Asset Management</h4>
+                 <p className="text-slate-500 leading-relaxed text-xs">By auctioning grazing land as residential plots, a ₹80 Lakh corpus fund was built, ensuring all amenities are maintained via bank interest without external grants.</p>
+              </div>
+              <div className="p-6 md:p-8 border border-slate-200 bg-slate-50">
+                 <h4 className="font-black text-blue-900 uppercase mb-4 text-[10px] md:text-xs tracking-widest underline decoration-orange-500">Governance Ethics</h4>
+                 <p className="text-slate-500 leading-relaxed text-xs">Secured its place as a functional unit by providing 100% piped water, healthcare, and digital RTI compliance under Article 243 G.</p>
+              </div>
+            </div>
+          </div>
+          <div className="bg-slate-900 text-white p-8 md:p-10 shadow-2xl h-fit rounded-br-[40px]">
+            <h4 className="font-black uppercase tracking-widest text-[10px] md:text-xs border-b border-white/20 pb-4 mb-8 flex items-center gap-2"><Megaphone size={16} className="text-orange-500"/> Bulletins</h4>
+            <ul className="space-y-6">
+              {["Progress Report 2026", "Audit Summary - RO Plant", "Gram Sabha Minutes", "Tax Recovery Policy"].map((doc, i) => (
+                <li key={i} className="flex gap-4 items-start group cursor-pointer border-b border-white/5 pb-4 last:border-0">
+                  <FileText size={18} className="text-orange-500 shrink-0" />
+                  <span className="text-[10px] font-black uppercase tracking-tighter group-hover:text-orange-500 transition-colors">{doc}</span>
+                </li>
+              ))}
             </ul>
           </div>
-          <div>
-            <h4 className="text-white text-xl font-bold mb-6">संपर्क करें</h4>
-            <p className="mb-2">📍 पंचायत भवन, लॉंगवाला</p>
-            <p className="mb-2">📞 +91 00000 00000</p>
-            <p className="mb-2">✉️ info@longwala.gov.in</p>
+        </div>
+      </section>
+
+      {/* 11. ASYMMETRIC GALLERY */}
+      <section className="py-16 md:py-24 bg-slate-50 px-6">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex justify-between items-end mb-8 md:mb-12 border-b-2 border-slate-900 pb-6">
+            <h3 className="text-2xl md:text-3xl font-black text-blue-900 uppercase tracking-tighter italic">Landmarks</h3>
+            <Link href="/gallery" className="text-[10px] font-black uppercase text-orange-600 border border-orange-500 px-3 md:px-4 py-1.5 hover:bg-orange-600 hover:text-white transition-all">Full Archive</Link>
+          </div>
+          <div className="grid grid-cols-12 gap-3 h-[500px] md:h-[600px] lg:h-[800px]">
+             <div className="col-span-12 md:col-span-8 relative group overflow-hidden bg-white border border-slate-200 p-2 shadow-lg">
+                <Image src="https://res.cloudinary.com/dpccapers/image/upload/v1767784998/ChatGPT_Image_Jan_7_2026_04_52_10_PM_xqujx1.png" fill className="object-cover group-hover:scale-105 transition-transform duration-1000 p-2" alt="G1"/>
+             </div>
+             <div className="hidden md:grid md:col-span-4 grid-rows-2 gap-3">
+                <div className="relative overflow-hidden border border-slate-200 bg-white group shadow-lg"><Image src="https://res.cloudinary.com/dpccapers/image/upload/v1767774290/WhatsApp_Image_2026-01-07_at_12.47.47_PM_1_ipdzzt.jpg" fill className="object-cover group-hover:scale-105" alt="G2"/></div>
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="relative border border-slate-200 overflow-hidden shadow-lg"><Image src="https://res.cloudinary.com/dpccapers/image/upload/v1767774291/WhatsApp_Image_2026-01-07_at_12.47.53_PM_csorlt.jpg" fill className="object-cover" alt="G3"/></div>
+                  <div className="relative border border-slate-200 overflow-hidden shadow-lg"><Image src="https://res.cloudinary.com/dpccapers/image/upload/v1767774290/WhatsApp_Image_2026-01-07_at_12.47.54_PM_1_zjqc4f.jpg" fill className="object-cover" alt="G4"/></div>
+                </div>
+             </div>
           </div>
         </div>
-        <div className="max-w-7xl mx-auto px-6 pt-8 border-t border-slate-800 text-center text-sm">
-          <p>© 2024 ग्राम पंचायत लॉंगवाला. सर्वाधिकार सुरक्षित। यह एक डेमो पोर्टल है।</p>
+      </section>
+
+      {/* FOOTER */}
+      {/* <footer className="bg-slate-900 text-white py-12 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="text-center md:text-left">
+            <div className="font-black uppercase tracking-widest text-lg mb-1 italic">Punsari Gram Panchayat</div>
+            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Sabarkantha, Gujarat, India</p>
+          </div>
+          <p className="text-[9px] font-bold uppercase tracking-[4px] text-slate-500 text-center">© 2026 Official Portal | Government of Gujarat</p>
         </div>
-      </footer>
+      </footer> */}
 
       <style jsx global>{`
-        @keyframes marquee {
-          0% { transform: translateX(100%); }
-          100% { transform: translateX(-100%); }
-        }
-        .animate-marquee {
-          display: inline-flex;
-          animation: marquee 25s linear infinite;
-        }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }
+        .animate-marquee { display: inline-flex; animation: marquee 25s linear infinite; }
+        .animate-marquee:hover { animation-play-state: paused; }
       `}</style>
     </main>
   );

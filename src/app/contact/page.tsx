@@ -1,174 +1,102 @@
 "use client";
-
-import Image from "next/image";
+import { Mail, Phone, MapPin, Clock, Table as TableIcon, Users } from "lucide-react";
 
 export default function ContactPage() {
   return (
-    <main className="bg-slate-50">
+    <main className="bg-white min-h-screen pb-24">
+      <header className="bg-blue-950 py-32 px-6 text-center text-white relative">
+        <h1 className="text-5xl md:text-7xl font-black italic uppercase tracking-tighter">Citizen <span className="text-orange-500 underline decoration-white decoration-4 underline-offset-8">Grievance</span></h1>
+        <p className="mt-8 uppercase font-bold tracking-[8px] text-[10px] text-slate-400 italic">Panchayat Office Support | Hours: 10AM - 5PM</p>
+      </header>
 
-      {/* HERO */}
-      <section className="bg-emerald-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
-          <h1 className="text-3xl sm:text-5xl font-bold mb-4">संपर्क करें</h1>
-          <p className="text-base sm:text-xl opacity-90">
-            Contact Gram Panchayat Longwala
-          </p>
+      <section className="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-20">
+        <div>
+           <div className="flex items-center gap-4 mb-12">
+              <MapPin className="text-orange-600" size={32} />
+              <h2 className="text-3xl font-black uppercase text-blue-950 underline decoration-slate-200 decoration-4">Office Information</h2>
+           </div>
+           
+           <div className="space-y-10">
+              <div className="p-10 bg-slate-50 rounded-[3rem] border border-slate-100 flex gap-6 items-start">
+                 <div className="w-12 h-12 bg-white rounded-full shadow flex items-center justify-center text-orange-600 shrink-0"><MapPin size={24}/></div>
+                 <div>
+                    <h4 className="font-black text-slate-900 uppercase italic mb-2 underline decoration-slate-200">Address</h4>
+                    <p className="text-slate-600 text-sm font-bold italic leading-relaxed">ग्राम पंचायत लॉंगवाला <br />तहसील – श्रीगंगानगर <br />जिला – श्रीगंगानगर, राजस्थान – 335001</p>
+                 </div>
+              </div>
+
+              <div className="p-10 bg-slate-50 rounded-[3rem] border border-slate-100 flex gap-6 items-start">
+                 <div className="w-12 h-12 bg-white rounded-full shadow flex items-center justify-center text-orange-600 shrink-0"><Phone size={24}/></div>
+                 <div>
+                    <h4 className="font-black text-slate-900 uppercase italic mb-2 underline decoration-slate-200">Connect</h4>
+                    <p className="text-slate-600 text-sm font-bold italic">Office Line: 0154X-XXXXXX</p>
+                    <p className="text-slate-600 text-sm font-bold italic">Public Grievance: +91-9XXXXXXXXX</p>
+                 </div>
+              </div>
+
+              <div className="p-10 bg-slate-50 rounded-[3rem] border border-slate-100 flex gap-6 items-start">
+                 <div className="w-12 h-12 bg-white rounded-full shadow flex items-center justify-center text-orange-600 shrink-0"><Mail size={24}/></div>
+                 <div>
+                    <h4 className="font-black text-slate-900 uppercase italic mb-2 underline decoration-slate-200">Official Email</h4>
+                    <p className="text-slate-600 text-sm font-bold italic">gp.longwala@rajasthan.gov.in</p>
+                    <p className="text-slate-600 text-sm font-bold italic">support.longwala@gmail.com</p>
+                 </div>
+              </div>
+           </div>
+        </div>
+
+        <div className="bg-white p-12 rounded-[4rem] shadow-2xl border border-slate-100 relative overflow-hidden">
+           <div className="absolute top-0 right-0 w-32 h-32 bg-orange-600/5 -mr-16 -mt-16 rounded-full" />
+           <h3 className="text-3xl font-black mb-10 uppercase text-slate-900 italic underline decoration-orange-500 decoration-8 underline-offset-4">Query / Feedback</h3>
+           <form className="space-y-6">
+              <div className="grid grid-cols-2 gap-4">
+                 <input className="w-full p-6 rounded-3xl border border-slate-100 bg-slate-50 focus:outline-orange-500 font-bold text-xs uppercase" placeholder="Full Name / पूरा नाम" />
+                 <input className="w-full p-6 rounded-3xl border border-slate-100 bg-slate-50 focus:outline-orange-500 font-bold text-xs uppercase" placeholder="Mobile / मोबाइल" />
+              </div>
+              <input className="w-full p-6 rounded-3xl border border-slate-100 bg-slate-50 focus:outline-orange-500 font-bold text-xs uppercase" placeholder="Email Address / ई-मेल" />
+              <textarea className="w-full p-6 rounded-3xl border border-slate-100 bg-slate-50 h-40 focus:outline-orange-500 font-bold text-xs uppercase" placeholder="Write message / संदेश लिखें" />
+              <button className="w-full bg-slate-950 text-white font-black p-6 rounded-3xl uppercase tracking-[6px] text-xs hover:bg-orange-600 transition-all shadow-xl">Submit Portal Query</button>
+           </form>
         </div>
       </section>
 
-      {/* INTRO */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-20">
-          <h2 className="text-2xl sm:text-3xl font-bold text-emerald-900 mb-6">
-            संपर्क जानकारी
-          </h2>
-          <p className="text-gray-700 max-w-4xl leading-relaxed text-sm sm:text-base">
-            ग्राम पंचायत लॉंगवाला से संबंधित किसी भी जानकारी, शिकायत,
-            सुझाव अथवा सेवा हेतु नीचे दिए गए माध्यमों से संपर्क किया जा सकता है।
-            पंचायत कार्यालय नागरिकों की सहायता हेतु सदैव तत्पर है।
-          </p>
+      {/* Office Hours Table */}
+      <section className="py-24 max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12">
+        <div className="bg-slate-900 p-12 rounded-[3rem] text-white">
+          <div className="flex items-center gap-4 mb-10">
+            <Clock className="text-orange-500" />
+            <h3 className="text-2xl font-black uppercase italic">Office Hours</h3>
+          </div>
+          <table className="w-full text-left text-sm uppercase font-black">
+             <tbody>
+                <tr className="border-b border-white/10"><td className="py-6">Mon - Fri</td><td className="py-6 text-orange-500">10:00 AM - 5:00 PM</td></tr>
+                <tr className="border-b border-white/10"><td className="py-6">Saturday</td><td className="py-6 text-orange-500">10:00 AM - 2:00 PM</td></tr>
+                <tr><td className="py-6">Sunday</td><td className="py-6 text-slate-500 italic">CLOSED</td></tr>
+             </tbody>
+          </table>
         </div>
-      </section>
-
-      {/* CONTACT DETAILS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-        <h3 className="text-xl sm:text-2xl font-bold text-emerald-900 mb-8 sm:mb-10">
-          पंचायत कार्यालय विवरण
-        </h3>
-
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            {
-              title: "पता",
-              content: (
-                <>
-                  ग्राम पंचायत लॉंगवाला <br />
-                  तहसील – श्रीगंगानगर <br />
-                  जिला – श्रीगंगानगर <br />
-                  राजस्थान – 335001
-                </>
-              ),
-            },
-            {
-              title: "संपर्क नंबर",
-              content: (
-                <>
-                  कार्यालय फोन: 0154X-XXXXXX <br />
-                  मोबाइल: +91-9XXXXXXXXX
-                </>
-              ),
-            },
-            {
-              title: "ई-मेल",
-              content: (
-                <>
-                  gp.longwala@rajasthan.gov.in <br />
-                  support.longwala@gmail.com
-                </>
-              ),
-            },
-          ].map((item, i) => (
-            <div key={i} className="bg-white p-6 rounded-lg shadow">
-              <h4 className="font-bold text-gray-800 mb-2">{item.title}</h4>
-              <p className="text-gray-700 text-sm leading-relaxed">
-                {item.content}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* OFFICE HOURS */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-          <h3 className="text-xl sm:text-2xl font-bold text-emerald-900 mb-6">
-            कार्यालय समय
-          </h3>
-
-          <div className="overflow-x-auto">
-            <table className="w-full border text-sm max-w-3xl">
-              <thead className="bg-emerald-900 text-white">
-                <tr>
-                  <th className="p-3 sm:p-4 text-left">दिन</th>
-                  <th className="p-3 sm:p-4 text-left">समय</th>
-                </tr>
-              </thead>
-              <tbody className="text-gray-700">
-                <tr className="border-b">
-                  <td className="p-3 sm:p-4">सोमवार – शुक्रवार</td>
-                  <td className="p-3 sm:p-4">10:00 AM – 5:00 PM</td>
-                </tr>
-                <tr>
-                  <td className="p-3 sm:p-4">शनिवार</td>
-                  <td className="p-3 sm:p-4">10:00 AM – 2:00 PM</td>
-                </tr>
-              </tbody>
-            </table>
+        <div className="bg-white p-12 rounded-[3rem] shadow-xl border border-slate-200">
+          <div className="flex items-center gap-4 mb-10">
+            <Users className="text-orange-600" />
+            <h3 className="text-2xl font-black uppercase text-blue-950 italic">Key Personnel</h3>
+          </div>
+          <div className="space-y-6">
+             {[
+               { name: "Shri Himanshu Patel", role: "Sarpanch", phone: "+91-98XXXXXXXX" },
+               { name: "Shri ________", role: "Up-Sarpanch", phone: "+91-94XXXXXXXX" },
+               { name: "Shri ________", role: "Panchayat Secretary", phone: "+91-91XXXXXXXX" }
+             ].map((p, i) => (
+               <div key={i} className="flex justify-between items-center border-b border-slate-100 pb-4">
+                  <div>
+                     <div className="font-black uppercase text-sm italic">{p.name}</div>
+                     <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{p.role}</div>
+                  </div>
+                  <div className="text-xs font-black text-orange-600">{p.phone}</div>
+               </div>
+             ))}
           </div>
         </div>
       </section>
-
-      {/* ELECTED REPRESENTATIVES */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-        <h3 className="text-xl sm:text-2xl font-bold text-emerald-900 mb-8 sm:mb-10">
-          निर्वाचित प्रतिनिधि
-        </h3>
-
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {[
-            { name: "श्री __________", role: "सरपंच", phone: "+91-9XXXXXXXXX" },
-            { name: "श्रीमती __________", role: "उप-सरपंच", phone: "+91-9XXXXXXXXX" },
-            { name: "श्री __________", role: "पंचायत सचिव", phone: "+91-9XXXXXXXXX" },
-          ].map((p, i) => (
-            <div key={i} className="bg-white p-6 rounded-lg shadow">
-              <h4 className="font-bold text-gray-800 mb-1">{p.name}</h4>
-              <p className="text-sm text-gray-600 mb-2">{p.role}</p>
-              <p className="text-sm text-gray-700">फोन: {p.phone}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* CONTACT FORM */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
-          <h3 className="text-xl sm:text-2xl font-bold text-emerald-900 mb-6">
-            सुझाव / शिकायत प्रपत्र
-          </h3>
-
-          <form className="grid gap-4 sm:grid-cols-2 max-w-4xl">
-            <input className="border p-3 rounded" placeholder="पूरा नाम" />
-            <input className="border p-3 rounded" placeholder="मोबाइल नंबर" />
-            <input className="border p-3 rounded sm:col-span-2" placeholder="ई-मेल" />
-            <textarea className="border p-3 rounded sm:col-span-2" rows={5} placeholder="संदेश लिखें" />
-            <button className="bg-emerald-900 text-white py-3 rounded sm:col-span-2">
-              सबमिट करें
-            </button>
-          </form>
-        </div>
-      </section>
-
-      {/* MAP */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16">
-        <h3 className="text-xl sm:text-2xl font-bold text-emerald-900 mb-6">
-          पंचायत स्थान
-        </h3>
-
-        <div className="relative h-64 sm:h-80 md:h-96 rounded-xl overflow-hidden shadow-lg">
-          <Image src="/images/map2.jpg" alt="" fill className="object-cover" />
-        </div>
-      </section>
-
-      {/* FOOTER NOTE */}
-      <section className="bg-emerald-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-12 sm:py-16 text-center">
-          <p className="max-w-3xl mx-auto text-sm sm:text-base leading-relaxed">
-            ग्राम पंचायत लॉंगवाला नागरिकों की सेवा के लिए प्रतिबद्ध है।
-            आपकी सहभागिता से ग्राम का विकास संभव है।
-          </p>
-        </div>
-      </section>
-
     </main>
   );
 }

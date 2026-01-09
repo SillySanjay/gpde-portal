@@ -1,41 +1,25 @@
 import "@/styles/globals.css";
-import Header from "@/components/Header";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { Inter } from "next/font/google";
+
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Gram Panchayat Longwala",
-  description: "Official Portal of Gram Panchayat Longwala",
+  title: "Official Portal | Punsari Gram Panchayat",
+  description: "India's No. 1 Model Village - A Case Study of Rurban Excellence.",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="hi">
-      <head>
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1"
-        />
-      </head>
-
-      <body className="bg-slate-50 text-gray-800 antialiased">
-        {/* HEADER */}
-        <Header />
-
-        {/* NAVBAR */}
+    <html lang="en">
+      <body className={`${inter.className} bg-slate-50 text-slate-900 antialiased`}>
+        {/* Government Branding Strip */}
+        <div className="h-1.5 w-full bg-gradient-to-r from-orange-500 via-white to-green-600 fixed top-0 z-[110]" />
+        
         <Navbar />
-
-        {/* MAIN CONTENT */}
-        <main className="min-h-screen">
-          {children}
-        </main>
-
-        {/* FOOTER */}
-        {/* <Footer /> */}
+        {children}
+        <Footer />
       </body>
     </html>
   );

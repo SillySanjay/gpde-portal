@@ -1,14 +1,17 @@
+"use client";
+import { Globe } from "lucide-react";
+
 export default function Header() {
   return (
-    <header className="bg-blue-900 text-white border-b border-blue-800">
-      <div className="max-w-7xl mx-auto px-4 py-3 text-center">
-        <p className="text-xs sm:text-sm font-semibold">
-          राजस्थान सरकार | Government of Rajasthan
-        </p>
-        <p className="text-sm sm:text-lg font-bold mt-1 tracking-wide">
-          ग्राम पंचायत लॉंगवाला | Gram Panchayat Longwala
-        </p>
+    <div className="bg-blue-900 text-white py-1.5 px-6 hidden md:block">
+      <div className="max-w-7xl mx-auto flex justify-between items-center text-[10px] font-bold uppercase tracking-widest">
+        <span className="flex items-center gap-2">
+          <Globe size={12} /> Government of Gujarat | Sabarkantha District
+        </span>
+        <div className="flex gap-4">
+          <span className="opacity-70">Digital India Initiative</span>
+        </div>
       </div>
-    </header>
+    </div>
   );
 }

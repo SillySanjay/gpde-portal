@@ -1,186 +1,84 @@
 "use client";
-
-import { motion } from "framer-motion";
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { History, Shield, TrendingUp, Award } from "lucide-react";
 
 export default function HistoryPage() {
   return (
-    <main className="bg-slate-50 overflow-x-hidden">
-
-      {/* HERO */}
-      <section className="relative h-[60vh] sm:h-[70vh] flex items-center justify-center text-center">
-        <Image
-          src="/images/history3.jpg"
-          alt="Village History"
-          fill
-          className="object-cover"
-        />
-        <div className="absolute inset-0 bg-black/60" />
-
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="relative z-10 max-w-4xl px-4 sm:px-6 text-white"
-        >
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4">
-            ग्राम पंचायत का इतिहास
-          </h1>
-          <p className="text-base sm:text-lg md:text-xl text-gray-200">
-            History & Heritage of Our Villages
-          </p>
-        </motion.div>
+    <main className="bg-white min-h-screen">
+      <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+        <Image src="https://res.cloudinary.com/dpccapers/image/upload/v1767774289/WhatsApp_Image_2026-01-07_at_12.47.45_PM_srmqri.jpg" fill className="object-cover opacity-20 grayscale" alt="History Bg"/>
+        <div className="relative z-10 text-center px-6">
+           <History size={64} className="mx-auto text-orange-600 mb-6" />
+           <h1 className="text-6xl md:text-8xl font-black text-slate-900 uppercase italic tracking-tighter leading-none">The<br/><span className="text-orange-600 underline decoration-slate-900 decoration-8 underline-offset-4">Legacy</span></h1>
+        </div>
       </section>
 
-      {/* INTRO */}
-      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-900 mb-6">
-            ऐतिहासिक पृष्ठभूमि
-          </h2>
-
-          <p className="text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed mb-6">
-            ग्राम पंचायत लोंगवाला और इसके अंतर्गत आने वाले गांवों का इतिहास
-            सदियों पुराना है। यह क्षेत्र कृषि और पारंपरिक ग्रामीण जीवन
-            शैली के लिए जाना जाता रहा है।
-          </p>
-
-          <p className="text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed">
-            प्राचीन समय में यह क्षेत्र व्यापारिक मार्गों और सिंचाई नहरों
-            के कारण महत्वपूर्ण था।
-          </p>
-        </motion.div>
+      {/* Leadership Section */}
+      <section className="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-20 items-center">
+        <div className="relative aspect-video rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white">
+           <Image src="https://res.cloudinary.com/dpccapers/image/upload/v1767774293/WhatsApp_Image_2026-01-07_at_12.47.58_PM_zgcqwp.jpg" fill alt="Leadership" className="object-cover" />
+        </div>
+        <div>
+           <h2 className="text-4xl font-black uppercase text-blue-950 mb-8 leading-tight tracking-tighter">Visionary Roots</h2>
+           <p className="text-lg text-slate-600 leading-relaxed mb-8 italic">"When I was elected in 2006, the Panchayat had a debt of ₹1.2 Lakh. People were struggling for basic amenities like electricity and roads." — Sarpanch Himanshu Patel.</p>
+           <p className="text-slate-500 text-sm leading-relaxed mb-10 text-justify">Drawing inspiration from the "Punsari Model," the leadership adopted a Rurban (Rural + Urban) approach. The strategy was clear: build a corpus fund using village assets rather than relying on external charity. This self-governance model ensured that Longwala became a republic independent for its wants yet interdependent for development.</p>
+           <div className="grid grid-cols-3 gap-4">
+              <div className="text-center"><div className="text-2xl font-black text-orange-600 italic leading-none">2006</div><div className="text-[8px] uppercase font-bold tracking-widest mt-1 text-slate-400">Foundation</div></div>
+              <div className="text-center"><div className="text-2xl font-black text-orange-600 italic leading-none">2012</div><div className="text-[8px] uppercase font-bold tracking-widest mt-1 text-slate-400">Recognition</div></div>
+              <div className="text-center"><div className="text-2xl font-black text-orange-600 italic leading-none">2026</div><div className="text-[8px] uppercase font-bold tracking-widest mt-1 text-slate-400">ISO Era</div></div>
+           </div>
+        </div>
       </section>
 
-      {/* TIMELINE */}
-      <section className="bg-white py-16 sm:py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-
-          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-center text-blue-900 mb-12 sm:mb-16">
-            ऐतिहासिक कालक्रम
-          </h2>
-
-          <div className="space-y-16">
-
-            {/* ITEM 1 */}
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
-            >
-              <Image
-                src="/images/history1.jpg"
-                alt=""
-                width={600}
-                height={400}
-                className="rounded-xl shadow-lg w-full h-auto"
-              />
-              <div>
-                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-800 mb-4">
-                  प्राचीन काल
-                </h3>
-                <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
-                  प्रारंभिक मानव बस्तियाँ जल स्रोतों के आसपास विकसित हुईं।
-                </p>
-              </div>
-            </motion.div>
-
-            {/* ITEM 2 */}
-            <motion.div
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
-            >
-              <div>
-                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-800 mb-4">
-                  मध्यकालीन युग
-                </h3>
-                <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
-                  राजपूताना शासनकाल में स्थानीय प्रशासन मजबूत हुआ।
-                </p>
-              </div>
-              <Image
-                src="/images/history2.jpg"
-                alt=""
-                width={600}
-                height={400}
-                className="rounded-xl shadow-lg w-full h-auto"
-              />
-            </motion.div>
-
-            {/* ITEM 3 */}
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
-            >
-              <Image
-                src="/images/history3.jpg"
-                alt=""
-                width={600}
-                height={400}
-                className="rounded-xl shadow-lg w-full h-auto"
-              />
-              <div>
-                <h3 className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-800 mb-4">
-                  ब्रिटिश काल
-                </h3>
-                <p className="text-gray-700 text-sm sm:text-base leading-relaxed">
-                  नहर परियोजनाओं से कृषि उत्पादन में वृद्धि हुई।
-                </p>
-              </div>
-            </motion.div>
-
+      {/* Evolution Timeline */}
+      <section className="bg-slate-900 py-32 text-white px-6 overflow-hidden">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex items-center gap-4 mb-20 justify-center">
+            <TrendingUp className="text-orange-500" />
+            <h2 className="text-4xl font-black uppercase italic tracking-widest">Evolution Timeline</h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-12 relative">
+             {/* Timeline Line */}
+             <div className="absolute top-[26px] left-0 w-full h-1 bg-white/5 hidden md:block" />
+             
+             {[
+               { year: "2006-2010", title: "Building Foundation", desc: "Foundations of basic infrastructure. Schools and health centers were prioritized. The Grazing Land Auction created an ₹80 Lakh fund." },
+               { year: "2011-2015", title: "Digital Integration", desc: "Introduced Wi-Fi, CCTV networks, and RO Mineral plants. Awarded best Gram Sabha National Award by the Prime Minister." },
+               { year: "2016-2026", title: "The ISO Smart Era", desc: "100% employment goals through Skill Centers. Full digital governance and ISO certification for institutional excellence." }
+             ].map((item, i) => (
+               <div key={i} className="relative z-10 pt-16">
+                  <div className="absolute top-0 left-0 w-12 h-12 bg-orange-600 rounded-full flex items-center justify-center font-black text-slate-900 border-4 border-slate-900 italic shadow-xl">{i+1}</div>
+                  <h4 className="text-2xl font-black text-orange-500 uppercase mb-4 tracking-tighter">{item.year}</h4>
+                  <h5 className="text-lg font-bold mb-4 uppercase text-white underline decoration-orange-500 decoration-2">{item.title}</h5>
+                  <p className="text-sm opacity-60 leading-relaxed italic">{item.desc}</p>
+               </div>
+             ))}
           </div>
         </div>
       </section>
 
-      {/* POST INDEPENDENCE */}
-      <section className="bg-blue-50 py-16 sm:py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-900 mb-8"
-          >
-            स्वतंत्रता के बाद विकास
-          </motion.h2>
-
-          <p className="text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed mb-4">
-            स्वतंत्रता के बाद ग्राम पंचायत प्रणाली लागू हुई।
-          </p>
-          <p className="text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed">
-            डिजिटल गवर्नेंस की दिशा में पंचायत अग्रसर है।
-          </p>
+      {/* Awards Section */}
+      <section className="py-24 px-6 max-w-7xl mx-auto">
+        <div className="flex items-center gap-4 mb-16 justify-center">
+          <Award className="text-orange-600" />
+          <h2 className="text-4xl font-black uppercase text-blue-950">Achievements</h2>
+        </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+           {[
+             { year: "2011", award: "Best Gram Panchayat Gujarat", source: "CM Narendra Modi" },
+             { year: "2012", award: "Rajiv Gandhi National Award", source: "Academy of Grassroots Studies" },
+             { year: "2013", award: "Nirmal Gram Award", source: "Central Government" },
+             { year: "2015", award: "Best Gram Sabha Award", source: "Ministry of PR" }
+           ].map((a, i) => (
+             <div key={i} className="p-10 bg-slate-50 border-t-8 border-orange-500 rounded-2xl shadow-lg flex flex-col items-center text-center group hover:bg-white transition-colors">
+                <div className="text-3xl font-black text-blue-900 mb-2 italic">#{a.year}</div>
+                <h4 className="font-black uppercase text-xs text-slate-900 mb-4 tracking-tighter leading-tight">{a.award}</h4>
+                <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">{a.source}</div>
+             </div>
+           ))}
         </div>
       </section>
-
-      {/* CULTURE */}
-      <section className="bg-white py-16 sm:py-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 text-center">
-          <motion.h2
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-2xl sm:text-3xl lg:text-4xl font-bold text-blue-900 mb-6"
-          >
-            सांस्कृतिक विरासत
-          </motion.h2>
-
-          <p className="text-sm sm:text-base lg:text-lg text-gray-700 leading-relaxed max-w-4xl mx-auto">
-            यहाँ की लोक संस्कृति और परंपराएँ आज भी जीवंत हैं।
-          </p>
-        </div>
-      </section>
-
     </main>
   );
 }

@@ -1,166 +1,80 @@
 "use client";
-
 import Image from "next/image";
+import { motion } from "framer-motion";
+import { Camera } from "lucide-react";
+
+const images = [
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774293/WhatsApp_Image_2026-01-07_at_12.47.58_PM_zgcqwp.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774292/WhatsApp_Image_2026-01-07_at_12.47.58_PM_1_mo3fef.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774292/WhatsApp_Image_2026-01-07_at_12.47.57_PM_1_e556te.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774291/WhatsApp_Image_2026-01-07_at_12.47.53_PM_csorlt.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774291/WhatsApp_Image_2026-01-07_at_12.47.55_PM_qpkwpk.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774290/WhatsApp_Image_2026-01-07_at_12.47.54_PM_1_zjqc4f.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774291/WhatsApp_Image_2026-01-07_at_12.47.55_PM_1_fphyfw.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774291/WhatsApp_Image_2026-01-07_at_12.47.48_PM_ojsxn4.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774291/WhatsApp_Image_2026-01-07_at_12.47.56_PM_1_pncm9s.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774290/WhatsApp_Image_2026-01-07_at_12.47.54_PM_bhci0c.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774290/WhatsApp_Image_2026-01-07_at_12.47.53_PM_1_npfu2b.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774290/WhatsApp_Image_2026-01-07_at_12.47.52_PM_lwgw18.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774290/WhatsApp_Image_2026-01-07_at_12.47.46_PM_1_fhv29v.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774289/WhatsApp_Image_2026-01-07_at_12.47.46_PM_seil7r.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774290/WhatsApp_Image_2026-01-07_at_12.47.47_PM_g5uc8t.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774290/WhatsApp_Image_2026-01-07_at_12.47.47_PM_1_ipdzzt.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774289/WhatsApp_Image_2026-01-07_at_12.47.52_PM_1_hp6mxa.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774289/WhatsApp_Image_2026-01-07_at_12.47.45_PM_srmqri.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774288/WhatsApp_Image_2026-01-07_at_12.47.43_PM_pz30g3.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774288/WhatsApp_Image_2026-01-07_at_12.47.50_PM_qrt22v.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774289/WhatsApp_Image_2026-01-07_at_12.47.45_PM_2_aelijb.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774288/WhatsApp_Image_2026-01-07_at_12.47.43_PM_1_y4bjxa.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774289/WhatsApp_Image_2026-01-07_at_12.47.51_PM_vjk3dp.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774288/WhatsApp_Image_2026-01-07_at_12.47.50_PM_2_ii1mlb.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774287/WhatsApp_Image_2026-01-07_at_12.47.50_PM_1_ge624p.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774287/WhatsApp_Image_2026-01-07_at_12.47.42_PM_uijm9a.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774287/WhatsApp_Image_2026-01-07_at_12.47.45_PM_1_pua2kn.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774287/WhatsApp_Image_2026-01-07_at_12.47.44_PM_1_toy9rh.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774287/WhatsApp_Image_2026-01-07_at_12.47.49_PM_upnjn6.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774286/WhatsApp_Image_2026-01-07_at_12.47.49_PM_1_vmcbqx.jpg",
+  "https://res.cloudinary.com/dpccapers/image/upload/v1767774286/WhatsApp_Image_2026-01-07_at_12.47.42_PM_1_zqsx9s.jpg"
+];
 
 export default function GalleryPage() {
   return (
-    <main className="bg-slate-50 overflow-x-hidden">
-
-      {/* HERO */}
-      <section className="bg-purple-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20 lg:py-24">
-          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">
-            फोटो गैलरी
-          </h1>
-          <p className="text-base sm:text-lg lg:text-xl opacity-90">
-            Gallery of Gram Panchayat Longwala
-          </p>
-        </div>
+    <main className="bg-white min-h-screen pb-24">
+      {/* Header Section */}
+      <section className="bg-slate-900 py-32 text-center text-white relative">
+        <Camera size={48} className="mx-auto text-orange-500 mb-6" />
+        <h1 className="text-6xl font-black uppercase italic tracking-tighter leading-none">
+          Visual<br/>
+          <span className="text-orange-500 underline decoration-white decoration-4 underline-offset-8">
+            Landmarks
+          </span>
+        </h1>
+        <p className="mt-8 text-slate-400 font-bold tracking-[6px] text-[10px] uppercase">
+          Rurban Infrastructure & Community Life
+        </p>
       </section>
 
-      {/* INTRO */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
-          <h2 className="text-2xl sm:text-3xl font-bold text-purple-900 mb-6">
-            ग्राम पंचायत की झलकियाँ
-          </h2>
-          <p className="text-gray-700 max-w-4xl leading-relaxed text-sm sm:text-base">
-            इस गैलरी में ग्राम पंचायत लॉंगवाला के विकास कार्य, कृषि गतिविधियाँ,
-            सामाजिक कार्यक्रम एवं सरकारी योजनाओं के क्रियान्वयन को दर्शाया गया है।
-          </p>
-        </div>
-      </section>
-
-      {/* DEVELOPMENT WORKS */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
-        <h3 className="text-xl sm:text-2xl font-bold text-purple-900 mb-8">
-          विकास कार्य (Development Works)
-        </h3>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {["dev", "dev2", "dev3", "eco1"].map((img, i) => (
-            <Image
-              key={i}
-              src={`/images/${img}.jpg`}
-              width={400}
-              height={500}
-              alt=""
-              className="rounded-lg shadow w-full h-auto"
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* AGRICULTURE */}
-      <section className="bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
-          <h3 className="text-xl sm:text-2xl font-bold text-purple-900 mb-8">
-            कृषि एवं सिंचाई (Agriculture & Irrigation)
-          </h3>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {["irri2", "irri5", "irri3"].map((img, i) => (
-              <Image
-                key={i}
-                src={`/images/${img}.jpg`}
-                width={400}
-                height={500}
-                alt=""
-                className="rounded-lg shadow w-full h-auto"
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* GOVERNMENT SCHEMES */}
-      <section className="max-w-7xl mx-auto px-4 sm:px-6 py-16">
-        <h3 className="text-xl sm:text-2xl font-bold text-purple-900 mb-8">
-          सरकारी योजनाएँ एवं लाभार्थी
-        </h3>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {[
-            {
-              img: "sch1",
-              title: "सरकारी योजनाओं का क्रियान्वयन",
-              text: "ग्राम पंचायत द्वारा पात्र नागरिकों को योजनाओं का लाभ।",
-            },
-            {
-              img: "sch2",
-              title: "ग्रामीण विकास कार्यक्रम",
-              text: "आधारभूत संरचना एवं विकास कार्य।",
-            },
-          ].map((item, i) => (
-            <div
-              key={i}
-              className="flex flex-col sm:flex-row gap-6 bg-white p-6 rounded-lg shadow"
+      {/* Image Grid Section */}
+      <div className="max-w-7xl mx-auto px-6 py-24">
+        <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-4 space-y-4">
+          {images.map((src, i) => (
+            <motion.div 
+              key={i} 
+              whileHover={{ scale: 1.02 }} 
+              className="relative break-inside-avoid rounded-2xl overflow-hidden shadow-xl border-4 border-slate-50 group"
             >
-              <Image
-                src={`/images/${item.img}.jpg`}
-                width={250}
-                height={300}
-                alt=""
-                className="rounded w-full sm:w-[250px] h-auto"
+              <Image 
+                src={src} 
+                width={500} 
+                height={700} 
+                alt={`Gallery Image ${i + 1}`} 
+                className="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-700" 
               />
-              <div>
-                <h4 className="font-bold text-gray-800 mb-2">
-                  {item.title}
-                </h4>
-                <p className="text-sm text-gray-600">
-                  {item.text}
-                </p>
-              </div>
-            </div>
+              <div className="absolute inset-0 bg-orange-600/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+            </motion.div>
           ))}
         </div>
-      </section>
-
-      {/* VIDEO GALLERY */}
-      <section className="bg-white">
-  <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 sm:py-20">
-    <h3 className="text-xl sm:text-2xl font-bold text-purple-900 mb-6">
-      वीडियो गैलरी
-    </h3>
-
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      {[
-        "/images/vil1.mp4",
-        "/images/vil2.mp4",
-        "/images/vil3.mp4",
-      ].map((src, i) => (
-        <div
-          key={i}
-          className="relative h-48 sm:h-56 rounded-xl overflow-hidden shadow-lg group"
-        >
-          <video
-            src={src}
-            autoPlay
-            muted
-            loop
-            playsInline
-            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-          />
-
-          {/* Optional overlay */}
-          <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition" />
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
-
-
-      {/* FOOTER NOTE */}
-      <section className="bg-purple-900 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-16 text-center">
-          <p className="max-w-3xl mx-auto leading-relaxed text-sm sm:text-base">
-            यह गैलरी ग्राम पंचायत लॉंगवाला के विकासात्मक प्रयासों,
-            पारदर्शिता एवं सामुदायिक सहभागिता को प्रदर्शित करती है।
-          </p>
-        </div>
-      </section>
-
+      </div>
     </main>
   );
 }
