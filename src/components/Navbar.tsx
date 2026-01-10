@@ -12,7 +12,6 @@ const navLinks = [
   { name: 'Economy', href: '/economy' },
   { name: 'Gallery', href: '/gallery' },
   { name: 'News', href: '/news' },
-  { name: 'Contact', href: '/contact' },
 ];
 
 export default function Navbar() {

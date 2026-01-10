@@ -286,16 +286,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FOOTER */}
-      {/* <footer className="bg-slate-900 text-white py-12 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="text-center md:text-left">
-            <div className="font-black uppercase tracking-widest text-lg mb-1 italic">Punsari Gram Panchayat</div>
-            <p className="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Sabarkantha, Gujarat, India</p>
-          </div>
-          <p className="text-[9px] font-bold uppercase tracking-[4px] text-slate-500 text-center">© 2026 Official Portal | Government of Gujarat</p>
-        </div>
-      </footer> */}
+      
 
       <style jsx global>{`
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }

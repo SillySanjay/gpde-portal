@@ -144,7 +144,7 @@ export default function GeographyPage() {
 
           <div className="space-y-4">
             <div className="relative h-64 border-4 border-white shadow-md rounded-sm overflow-hidden">
-               <Image src="https://res.cloudinary.com/dpccapers/image/upload/v1767774287/WhatsApp_Image_2026-01-07_at_12.47.49_PM_upnjn6.jpg" fill className="object-cover" alt="Irrigation Area"/>
+               <Image src="/images/geography1.png" fill className="object-cover" alt="Irrigation Area"/>
             </div>
             <p className="text-[10px] font-black uppercase text-slate-400 text-center tracking-widest italic">Irrigation Channels & Catchment Area</p>
           </div>
