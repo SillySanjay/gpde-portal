@@ -13,7 +13,7 @@ export default function HistoryPage() {
           src="/images/history2.png"
           fill
           sizes="100vw"
-          className="object-cover object-center opacity-25"
+          className="object-cover object-center opacity-10"
           alt="History Bg"
           priority
         />
@@ -30,15 +30,16 @@ export default function HistoryPage() {
 
       {/* LEADERSHIP */}
       <section className="max-w-7xl mx-auto px-6 py-24 grid lg:grid-cols-2 gap-20 items-center">
-        <div className="relative aspect-video rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white">
-          <Image
-            src="/images/history1.png"
-            fill
-            sizes="(max-width:768px) 100vw, 50vw"
-            alt="Leadership"
-            className="object-cover object-center"
-          />
-        </div>
+        <div className="relative h-[220px] sm:h-[300px] md:h-auto md:aspect-video rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white">
+  <Image
+    src="/images/history3.png"
+    fill
+    sizes="(max-width:768px) 100vw, 50vw"
+    alt="Leadership"
+    className="object-contain md:object-fill object-center bg-white"
+  />
+</div>
+
 
         <div>
           <h2 className="text-4xl font-black uppercase text-blue-950 mb-8 leading-tight tracking-tighter">

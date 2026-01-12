@@ -35,7 +35,7 @@ export default function HomePage() {
       <section className="relative w-full overflow-hidden bg-slate-900 h-[45vh] md:h-[50vh] lg:h-[700px]">
         <AnimatePresence mode="wait">
           <motion.div key={index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1 }} className="absolute inset-0 h-full w-full">
-            <Image src={carouselPhotos[index]} fill alt="Slider" className="object-cover object-center" priority />
+            <Image src={carouselPhotos[index]} fill alt="Slider" className="object-cover object-fill" priority />
             <div className="absolute inset-0 bg-black/40" />
           </motion.div>
         </AnimatePresence>
@@ -169,13 +169,13 @@ export default function HomePage() {
               <p className="text-[10px] uppercase font-bold text-blue-300 tracking-[3px]">Digital Services & Support Helplines</p>
             </div>
           </div>
-          <div className="flex flex-wrap justify-center gap-4">
+          {/* <div className="flex flex-wrap justify-center gap-4">
             {['E-Gram Portal', 'Dairy Login', 'Tax Payment', 'School Login'].map((btn) => (
               <button key={btn} className="px-4 py-2 border border-white/20 rounded-md text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-blue-900 transition-all">
                 {btn}
               </button>
             ))}
-          </div>
+          </div> */}
         </div>
         <div className="absolute top-0 right-0 opacity-10 translate-x-1/4 -translate-y-1/4">
           <Landmark size={240} />

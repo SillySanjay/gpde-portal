@@ -1,67 +1,159 @@
 "use client";
 import { motion } from "framer-motion";
-import { Newspaper, BellRing, Info, ExternalLink } from "lucide-react";
+import { Newspaper, BellRing, Info, ExternalLink, Calendar, FileText, ChevronRight } from "lucide-react";
+import Image from "next/image";
 
 export default function NewsPage() {
   const newsItems = [
-    { title: "ISO 9001:2026 Certification Awarded to Longwala Panchayat", date: "Jan 05, 2026", category: "Govt Status" },
-    { title: "New RO Plant Units Installed: Chilled Water now at ₹7 per 20L", date: "Jan 02, 2026", category: "Infrastructure" },
-    { title: "Atal Express Bus Route Expanded to Rural Dairies", date: "Dec 28, 2025", category: "Transport" },
-    { title: "National Delegates from Nairobi visit Longwala to study Rurban Model", date: "Dec 20, 2025", category: "Global Recognition" },
-    { title: "Women's Skill Center Graduation: 45 New Tailors trained", date: "Dec 15, 2025", category: "Empowerment" },
-    { title: "100% Tax Recovery Status achieved for FY 2025-26", date: "Dec 05, 2025", category: "Finance" }
+    { 
+        title: "ISO 9001:2026 Certification Awarded to Longwala Panchayat", 
+        date: "Jan 05, 2026", 
+        category: "GOVT STATUS", 
+        img: "https://res.cloudinary.com/dpccapers/image/upload/v1767784998/ChatGPT_Image_Jan_7_2026_04_52_10_PM_xqujx1.png",
+        ref: "LGP/ISO/2026/01"
+    },
+    { 
+        title: "New RO Plant Units Installed: Chilled Water at ₹7 per 20L", 
+        date: "Jan 02, 2026", 
+        category: "INFRASTRUCTURE", 
+        img: "https://res.cloudinary.com/dpccapers/image/upload/v1767774292/WhatsApp_Image_2026-01-07_at_12.47.57_PM_1_e556te.jpg",
+        ref: "LGP/INFRA/2026/09"
+    },
+    { 
+        title: "Atal Express Bus Route Expanded to Rural Dairies", 
+        date: "Dec 28, 2025", 
+        category: "TRANSPORT", 
+        img: "https://res.cloudinary.com/dpccapers/image/upload/v1767774290/WhatsApp_Image_2026-01-07_at_12.47.47_PM_1_ipdzzt.jpg",
+        ref: "LGP/TRANS/2025/44"
+    },
+    { 
+        title: "Women's Skill Center Graduation: 45 New Tailors trained", 
+        date: "Dec 15, 2025", 
+        category: "EMPOWERMENT", 
+        img: "https://res.cloudinary.com/dpccapers/image/upload/v1767774291/WhatsApp_Image_2026-01-07_at_12.47.56_PM_1_pncm9s.jpg",
+        ref: "LGP/WEM/2025/12"
+    },
   ];
 
   return (
-    <main className="bg-slate-50 min-h-screen pb-24">
-      {/* Live Marquee */}
-      <div className="bg-orange-600 text-white py-3 border-b-4 border-blue-900 overflow-hidden relative z-50">
-        <motion.div animate={{ x: [1000, -1500] }} transition={{ repeat: Infinity, duration: 25, ease: "linear" }} className="flex whitespace-nowrap text-xs font-black uppercase tracking-[3px]">
-          <span className="mx-12">📢 OFFICIAL NOTIFICATION: Gram Sabha meeting scheduled for Feb 15th at 10 AM.</span>
-          <span className="mx-12">• New Borewell Project Approved for Ward 7.</span>
-          <span className="mx-12">• Biometric Attendance active at Panchayat Office.</span>
-        </motion.div>
+    <main className="bg-[#f8fafc] min-h-screen pb-24 font-sans">
+      
+      {/* 1. URGENT TICKER (Modern Marquee) */}
+      <div className="bg-orange-600 text-white py-3 border-b-4 border-blue-950 overflow-hidden sticky top-0 z-[100] shadow-xl">
+        <div className="flex animate-marquee whitespace-nowrap text-[10px] font-black uppercase tracking-[4px]">
+          {[1, 2].map((i) => (
+            <span key={i} className="flex items-center">
+              <span className="mx-10 flex items-center gap-2"><BellRing size={14}/> Gram Sabha meeting scheduled for Feb 15th at 10 AM.</span>
+              <span className="mx-10 flex items-center gap-2">• New Borewell Project Approved for Ward 7.</span>
+              <span className="mx-10 flex items-center gap-2">• Biometric Attendance active at Panchayat Office.</span>
+            </span>
+          ))}
+        </div>
       </div>
 
-      <header className="bg-white py-24 px-6 border-b">
-         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-10">
-            <div className="max-w-xl text-center md:text-left">
-               <div className="flex items-center gap-4 mb-6 justify-center md:justify-start">
-                  <Newspaper className="text-orange-600" size={40} />
-                  <h1 className="text-5xl font-black uppercase italic tracking-tighter">News & <br/><span className="text-orange-500 underline decoration-slate-900 decoration-4">Bulletins</span></h1>
+      {/* 2. PAGE HEADER */}
+      <header className="bg-white py-16 px-6 border-b border-slate-200">
+         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-end justify-between gap-8">
+            <div className="space-y-4 text-center md:text-left">
+               <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 text-blue-700 rounded-full text-[10px] font-black uppercase tracking-widest">
+                  <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse" /> Live Information Desk
                </div>
-               <p className="text-slate-500 text-lg italic leading-relaxed">Official updates from the Longwala Gram Panchayat Information Desk.</p>
+               <h1 className="text-5xl md:text-7xl font-black uppercase tracking-tighter text-slate-900 leading-none">Media & <br/><span className="text-orange-600 italic">Bulletins.</span></h1>
             </div>
-            <div className="bg-blue-900 p-8 rounded-[3rem] text-white flex gap-10 items-center shadow-2xl">
-               <div className="text-center">
-                  <div className="text-4xl font-black italic text-orange-500">2026</div>
-                  <div className="text-[8px] uppercase font-bold tracking-[3px] opacity-60">Year of Progress</div>
-               </div>
-               <div className="w-1 h-12 bg-white/20" />
-               <BellRing size={40} className="text-orange-500 animate-bounce" />
+            <div className="hidden lg:block text-right">
+                <p className="text-[10px] font-black uppercase text-slate-400 tracking-[3px] mb-1">Sabarkantha, Gujarat</p>
+                <p className="text-sm font-bold text-slate-900 uppercase">Official Press Portal</p>
             </div>
          </div>
       </header>
 
-      <section className="max-w-5xl mx-auto px-6 py-24">
-        <div className="space-y-6">
+      {/* 3. MAIN CONTENT GRID */}
+      <section className="max-w-7xl mx-auto px-6 py-16 grid lg:grid-cols-12 gap-12">
+        
+        {/* LEFT: News Cards (8 Units) */}
+        <div className="lg:col-span-8 space-y-10">
            {newsItems.map((news, i) => (
-             <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i*0.1 }} className="bg-white p-10 rounded-[2rem] shadow-lg border border-slate-100 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 hover:border-orange-500 transition-all group">
-                <div className="flex gap-8 items-center">
-                  <div className="w-14 h-14 bg-slate-50 rounded-full flex items-center justify-center text-blue-900 group-hover:bg-orange-50 transition-colors"><Info size={24}/></div>
-                  <div>
-                    <span className="text-[10px] font-black text-orange-600 uppercase tracking-widest mb-1 block">{news.category}</span>
-                    <h3 className="text-xl font-black text-slate-900 uppercase italic group-hover:text-orange-600 transition-colors">{news.title}</h3>
-                  </div>
+             <motion.div 
+                key={i} 
+                initial={{ opacity: 0, x: -20 }} 
+                whileInView={{ opacity: 1, x: 0 }} 
+                className="bg-white rounded-[2rem] overflow-hidden shadow-sm border border-slate-100 hover:shadow-2xl transition-all group flex flex-col md:flex-row h-full md:h-64"
+             >
+                <div className="md:w-72 relative h-48 md:h-full overflow-hidden">
+                   <Image src={news.img} fill className="object-cover group-hover:scale-110 transition-transform duration-700" alt="News" />
+                   <div className="absolute top-4 left-4 bg-orange-600 text-white text-[8px] font-black px-3 py-1 rounded-full uppercase tracking-widest">
+                      {news.category}
+                   </div>
                 </div>
-                <div className="text-right shrink-0">
-                   <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-1">{news.date}</div>
-                   <div className="text-orange-600 font-black text-[10px] uppercase flex items-center gap-1 cursor-pointer hover:underline">Read More <ExternalLink size={10}/></div>
+                <div className="flex-1 p-8 flex flex-col justify-between">
+                   <div>
+                      <div className="flex items-center gap-3 text-slate-400 text-[10px] font-black uppercase tracking-widest mb-3">
+                         <Calendar size={14} className="text-orange-500" /> {news.date}
+                      </div>
+                      <h3 className="text-xl md:text-2xl font-black text-slate-900 uppercase tracking-tighter leading-tight group-hover:text-blue-900 transition-colors">
+                        {news.title}
+                      </h3>
+                   </div>
+                   <div className="flex items-center justify-between mt-6 pt-4 border-t border-slate-50">
+                      <span className="text-[9px] font-bold text-slate-400 uppercase tracking-widest">REF: {news.ref}</span>
+                      
+                   </div>
                 </div>
              </motion.div>
            ))}
         </div>
+
+        {/* RIGHT: Sidebar (4 Units) */}
+        <aside className="lg:col-span-4 space-y-8">
+           {/* Notice Board Card */}
+           <div className="bg-blue-950 rounded-[2.5rem] p-8 text-white shadow-2xl relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-32 h-32 bg-blue-800/20 rounded-full -mr-16 -mt-16" />
+              <div className="flex items-center gap-3 mb-8">
+                 <BellRing className="text-orange-500" size={24} />
+                 <h4 className="text-xl font-black uppercase italic tracking-tighter">Notice Board</h4>
+              </div>
+              <div className="space-y-6">
+                 {[
+                   "Quarterly Audit Meeting - Feb 2026",
+                   "RO Plant Maintenance Schedule",
+                   "Sakhi Mandal Loan Application Open",
+                   "New Street Light Tenders Invited"
+                 ].map((notice, idx) => (
+                   <div key={idx} className="flex gap-4 group cursor-pointer border-b border-white/10 pb-4 last:border-0">
+                      <FileText className="text-orange-500 shrink-0" size={16} />
+                      <p className="text-[10px] font-bold uppercase tracking-widest group-hover:text-orange-400 transition-colors">{notice}</p>
+                   </div>
+                 ))}
+              </div>
+              <button className="w-full mt-8 bg-white/10 hover:bg-white/20 border border-white/20 py-4 rounded-2xl text-[9px] font-black uppercase tracking-[3px] transition-all">
+                 Download All Notices (PDF)
+              </button>
+           </div>
+
+           {/* Quick Stats Card */}
+           <div className="bg-white rounded-[2.5rem] p-8 border border-slate-100 shadow-sm">
+              <h4 className="text-slate-900 font-black uppercase text-xs tracking-[4px] mb-6">Transparency Index</h4>
+              <div className="space-y-4">
+                 <div className="flex justify-between items-center"><span className="text-[10px] font-bold text-slate-400 uppercase">RTI Response Rate</span><span className="text-blue-600 font-black italic">100%</span></div>
+                 <div className="flex justify-between items-center"><span className="text-[10px] font-bold text-slate-400 uppercase">Digital Literacy</span><span className="text-blue-600 font-black italic">83%+</span></div>
+                 <div className="flex justify-between items-center"><span className="text-[10px] font-bold text-slate-400 uppercase">Fund Utilization</span><span className="text-blue-600 font-black italic">98.4%</span></div>
+              </div>
+           </div>
+        </aside>
+
       </section>
+
+      {/* Global CSS for marquee */}
+      <style jsx global>{`
+        @keyframes marquee {
+          0% { transform: translateX(0); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee {
+          display: flex;
+          animation: marquee 30s linear infinite;
+        }
+      `}</style>
     </main>
   );
 }
