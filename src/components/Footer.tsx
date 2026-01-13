@@ -109,26 +109,6 @@ export default function Footer() {
             </div>
           </div>
         </div>
-
-        {/* GOVT RECOGNITION STRIP */}
-        <div className="flex flex-wrap items-center justify-center gap-x-10 gap-y-4 py-6 border-t border-white/5 border-b">
-           {['Digital Gujarat', 'E-Gram Swaraj', 'Sabarkantha District', 'MGNREGA', 'RTI Online'].map((link, i) => (
-             <a key={i} href="#" className="text-[9px] font-black uppercase tracking-[3px] text-slate-500 hover:text-orange-500 transition-all flex items-center gap-1">
-               {link} <ExternalLink size={8} />
-             </a>
-           ))}
-        </div>
-
-        {/* BOTTOM COPYRIGHT */}
-        <div className="pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-[9px] font-black uppercase tracking-[4px] opacity-40">
-            © 2026 Punsari Gram Panchayat | Sabarkantha, Gujarat
-          </p>
-          <div className="flex items-center gap-8 text-[9px] font-black uppercase tracking-[2px]">
-             <span className="hover:text-white cursor-pointer transition-colors">Privacy Policy</span>
-             <span className="hover:text-white cursor-pointer transition-colors">Transparency Report</span>
-          </div>
-        </div>
       </div>
     </footer>
   );

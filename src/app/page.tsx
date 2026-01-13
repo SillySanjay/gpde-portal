@@ -29,13 +29,11 @@ export default function HomePage() {
   return (
     <main className="bg-white font-sans text-slate-900 leading-relaxed antialiased overflow-x-hidden">
       
-      
-
       {/* 2. GOVERNMENT CAROUSEL */}
       <section className="relative w-full overflow-hidden bg-slate-900 h-[45vh] md:h-[50vh] lg:h-[700px]">
         <AnimatePresence mode="wait">
           <motion.div key={index} initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} transition={{ duration: 1 }} className="absolute inset-0 h-full w-full">
-            <Image src={carouselPhotos[index]} fill alt="Slider" className="object-cover object-fill" priority />
+            <Image src={carouselPhotos[index]} fill alt="Slider" className="object-cover object-center" priority />
             <div className="absolute inset-0 bg-black/40" />
           </motion.div>
         </AnimatePresence>
@@ -75,9 +73,6 @@ export default function HomePage() {
             <p className="text-slate-600 leading-relaxed text-justify italic font-medium text-sm md:text-base">
               Punsari represents the transformation of rural India. Under the vision of making villages self-reliant, we have integrated high-tech surveillance, 100% digital literacy, and urban-standard education while maintaining our cultural roots.
             </p>
-            <button className="flex items-center gap-2 text-blue-900 font-black text-xs uppercase tracking-widest group">
-              View Development Plan <ArrowRight size={16} className="group-hover:translate-x-2 transition-transform"/>
-            </button>
           </div>
           <div className="grid grid-cols-2 gap-3 md:gap-4">
              <div className="bg-slate-50 p-4 md:p-6 rounded-2xl border-l-4 border-orange-500">
@@ -105,22 +100,28 @@ export default function HomePage() {
       </section>
 
       {/* 7. IMAGE GRAPHIC SECTION */}
-      <section className="bg-slate-50 py-12 md:py-16 px-6">
-        <div className="max-w-7xl mx-auto">
-          <div className="relative w-full aspect-[14/11] md:aspect-[15/10] bg-white p-4 shadow-xl rounded-xl">
-             <Image 
-               src="https://res.cloudinary.com/dpccapers/image/upload/v1767785378/ChatGPT_Image_Jan_7_2026_04_59_09_PM_zlfefj.png" 
-               fill 
-               alt="Digital Ecosystem Overview" 
-               className="object-contain p-4 md:p-8"
-             />
-          </div>
+      <section className="py-0 px-0 bg-transparent">
+        <div className="relative w-full h-[260px] sm:h-[320px] overflow-hidden md:hidden">
+          <Image
+            src="https://res.cloudinary.com/dpccapers/image/upload/v1767785378/ChatGPT_Image_Jan_7_2026_04_59_09_PM_zlfefj.png"
+            fill
+            alt="Digital Ecosystem Overview"
+            className="object-cover object-center"
+          />
+        </div>
+        <div className="relative w-full aspect-[15/10] overflow-hidden hidden md:block">
+          <Image
+            src="https://res.cloudinary.com/dpccapers/image/upload/v1767785378/ChatGPT_Image_Jan_7_2026_04_59_09_PM_zlfefj.png"
+            fill
+            alt="Digital Ecosystem Overview"
+            className="object-contain object-center"
+          />
         </div>
       </section>
 
       {/* 6. GOVERNANCE PILLARS */}
-      <section className="py-16 md:py-24 bg-white px-6 border-y">
-        <div className="max-w-7xl mx-auto">
+      <section className="py-16 md:py-24 bg-white border-y">
+        <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-12 md:mb-16">
             <h3 className="text-blue-900 text-2xl md:text-3xl font-black uppercase tracking-tighter italic">Pillars of Governance</h3>
             <p className="text-slate-400 text-[10px] font-bold uppercase tracking-[4px] mt-2">Professional Rural Management Strategy</p>
@@ -159,34 +160,26 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* FILLING THE GAP: QUICK CITIZEN SERVICES */}
-      <section className="bg-blue-900 py-10 px-6 text-white overflow-hidden relative">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
-          <div className="flex items-center gap-4">
-            <Activity className="text-orange-500 hidden sm:block" size={40} />
-            <div>
-              <h4 className="text-xl font-black uppercase italic tracking-tighter">Citizen Quick Access</h4>
-              <p className="text-[10px] uppercase font-bold text-blue-300 tracking-[3px]">Digital Services & Support Helplines</p>
-            </div>
-          </div>
-          {/* <div className="flex flex-wrap justify-center gap-4">
-            {['E-Gram Portal', 'Dairy Login', 'Tax Payment', 'School Login'].map((btn) => (
-              <button key={btn} className="px-4 py-2 border border-white/20 rounded-md text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-blue-900 transition-all">
-                {btn}
-              </button>
-            ))}
-          </div> */}
-        </div>
-        <div className="absolute top-0 right-0 opacity-10 translate-x-1/4 -translate-y-1/4">
-          <Landmark size={240} />
-        </div>
-      </section>
+      {/* ✅ NEW PHOTO SECTION AFTER STATS */}
+      <section className="relative w-full overflow-hidden">
+  <div className="relative w-full aspect-[3/2] md:h-[1100px]">
+    <Image
+      src="/images/home.png"
+      alt="Punsari Development"
+      fill
+      priority
+      sizes="100vw"
+      className="object-cover object-center"
+    />
+  </div>
+</section>
 
+     
       {/* 8. GROWTH MODELS TILES */}
       <section className="py-16 md:py-24 bg-white px-6 border-y border-slate-200">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-center text-2xl md:text-3xl font-black text-blue-900 uppercase mb-12 md:mb-16 tracking-tight">Applied Growth Models</h2>
-          <div className="grid md:grid-cols-3 gap-4 md:gap-1 ">
+          <div className="grid md:grid-cols-3 gap-4 md:gap-1">
              {[
                { title: "PURA Model", desc: "Provision of Urban Amenities in Rural Areas focusing on Physical, Electronic, and Economic connectivity." },
                { title: "Hub & Spoke", desc: "Information empowerment ensuring data reaches citizens via Wi-Fi and Public Address networks." },
@@ -264,29 +257,91 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* 11. ASYMMETRIC GALLERY */}
+      {/* 11. ASYMMETRIC GALLERY (ANIMATIONS REMOVED) */}
       <section className="py-16 md:py-24 bg-slate-50 px-6">
         <div className="max-w-7xl mx-auto">
+
           <div className="flex justify-between items-end mb-8 md:mb-12 border-b-2 border-slate-900 pb-6">
-            <h3 className="text-2xl md:text-3xl font-black text-blue-900 uppercase tracking-tighter italic">Landmarks</h3>
-            <Link href="/gallery" className="text-[10px] font-black uppercase text-orange-600 border border-orange-500 px-3 md:px-4 py-1.5 hover:bg-orange-600 hover:text-white transition-all">Full Archive</Link>
+            <h3 className="text-2xl md:text-3xl font-black text-blue-900 uppercase tracking-tighter italic">
+              Landmarks
+            </h3>
+            <Link
+              href="/gallery"
+              className="text-[10px] font-black uppercase text-orange-600 border border-orange-500 px-3 md:px-4 py-1.5 hover:bg-orange-600 hover:text-white transition-all"
+            >
+              Full Archive
+            </Link>
           </div>
-          <div className="grid grid-cols-12 gap-3 h-[500px] md:h-[600px] lg:h-[800px]">
-             <div className="col-span-12 md:col-span-8 relative group overflow-hidden bg-white border border-slate-200 p-2 shadow-lg">
-                <Image src="https://res.cloudinary.com/dpccapers/image/upload/v1767784998/ChatGPT_Image_Jan_7_2026_04_52_10_PM_xqujx1.png" fill className="object-cover group-hover:scale-105 transition-transform duration-1000 p-2" alt="G1"/>
-             </div>
-             <div className="hidden md:grid md:col-span-4 grid-rows-2 gap-3">
-                <div className="relative overflow-hidden border border-slate-200 bg-white group shadow-lg"><Image src="https://res.cloudinary.com/dpccapers/image/upload/v1767774290/WhatsApp_Image_2026-01-07_at_12.47.47_PM_1_ipdzzt.jpg" fill className="object-cover group-hover:scale-105" alt="G2"/></div>
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="relative border border-slate-200 overflow-hidden shadow-lg"><Image src="https://res.cloudinary.com/dpccapers/image/upload/v1767774291/WhatsApp_Image_2026-01-07_at_12.47.53_PM_csorlt.jpg" fill className="object-cover" alt="G3"/></div>
-                  <div className="relative border border-slate-200 overflow-hidden shadow-lg"><Image src="https://res.cloudinary.com/dpccapers/image/upload/v1767774290/WhatsApp_Image_2026-01-07_at_12.47.54_PM_1_zjqc4f.jpg" fill className="object-cover" alt="G4"/></div>
+
+          {/* MOBILE VIEW (NO ANIMATION) */}
+          <div className="grid grid-cols-1 gap-4 md:hidden">
+            {[
+              "/images/gallery2.png",
+              "https://res.cloudinary.com/dpccapers/image/upload/v1767774290/WhatsApp_Image_2026-01-07_at_12.47.47_PM_1_ipdzzt.jpg",
+              "https://res.cloudinary.com/dpccapers/image/upload/v1767774291/WhatsApp_Image_2026-01-07_at_12.47.53_PM_csorlt.jpg",
+              "https://res.cloudinary.com/dpccapers/image/upload/v1767774290/WhatsApp_Image_2026-01-07_at_12.47.54_PM_1_zjqc4f.jpg",
+            ].map((src, i) => (
+              <div key={i} className="relative h-64 overflow-hidden border border-slate-200">
+                <Image
+                  src={src}
+                  fill
+                  sizes="100vw"
+                  className="object-cover object-center"
+                  alt={`G${i + 1}`}
+                />
+              </div>
+            ))}
+          </div>
+
+          {/* DESKTOP VIEW (NO ANIMATION) */}
+          <div className="hidden md:grid grid-cols-12 gap-3 h-[500px] md:h-[600px] lg:h-[800px]">
+            <div className="col-span-8 relative overflow-hidden shadow-lg">
+  <Image
+    src="https://res.cloudinary.com/dpccapers/image/upload/v1767784998/ChatGPT_Image_Jan_7_2026_04_52_10_PM_xqujx1.png"
+    fill
+    sizes="70vw"
+    className="object-cover object-center"
+    alt="G1"
+  />
+</div>
+
+            <div className="grid col-span-4 grid-rows-2 gap-3">
+              <div className="relative overflow-hidden border border-slate-200 bg-white shadow-lg">
+                <Image
+                  src="https://res.cloudinary.com/dpccapers/image/upload/v1767774290/WhatsApp_Image_2026-01-07_at_12.47.47_PM_1_ipdzzt.jpg"
+                  fill
+                  sizes="30vw"
+                  className="object-cover object-center"
+                  alt="G2"
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div className="relative border border-slate-200 overflow-hidden shadow-lg">
+                  <Image
+                    src="https://res.cloudinary.com/dpccapers/image/upload/v1767774291/WhatsApp_Image_2026-01-07_at_12.47.53_PM_csorlt.jpg"
+                    fill
+                    sizes="15vw"
+                    className="object-cover object-center"
+                    alt="G3"
+                  />
                 </div>
-             </div>
+
+                <div className="relative border border-slate-200 overflow-hidden shadow-lg">
+                  <Image
+                    src="https://res.cloudinary.com/dpccapers/image/upload/v1767774290/WhatsApp_Image_2026-01-07_at_12.47.54_PM_1_zjqc4f.jpg"
+                    fill
+                    sizes="15vw"
+                    className="object-cover object-center"
+                    alt="G4"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
+
         </div>
       </section>
-
-      
 
       <style jsx global>{`
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-100%); } }

@@ -83,7 +83,7 @@ export default function Navbar() {
               className="fixed top-0 left-0 bottom-0 w-[280px] bg-white z-[120] shadow-2xl flex flex-col lg:hidden"
             >
               <div className="p-6 border-b flex items-center justify-between bg-blue-900 text-white">
-                <div className="font-black uppercase tracking-widest text-sm">Navigation Menu</div>
+                <div className="font-black uppercase tracking-widest text-sm">Gram Panchayat</div>
                 <button onClick={() => setIsDrawerOpen(false)} className="p-1 hover:bg-white/10 rounded-full">
                   <X size={24}/>
                 </button>

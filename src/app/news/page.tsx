@@ -13,7 +13,7 @@ export default function NewsPage() {
       id: 1,
       title: "Punsari Leads National Digital Literacy Rankings 2026",
       desc: "Under Aryan Patel's leadership, Punsari achieves 100% digital proficiency among youth and elders alike.",
-      image: "/images/news1.png"
+      image: "/images/gallery5.png"
     },
     {
       id: 2,
@@ -37,7 +37,7 @@ export default function NewsPage() {
       title: "Women Entrepreneurs Scaling Dairy Operations",
       category: "EMPOWERMENT",
       desc: "111 Sakhi Mandals report a 40% increase in monthly revenue following the latest automation workshop.",
-      image: "https://res.cloudinary.com/dpccapers/image/upload/v1767774291/WhatsApp_Image_2026-01-07_at_12.47.56_PM_1_pncm9s.jpg",
+      image: "/images/news1.png",
       ref: "LGP/WEM/2026/01"
     },
     {
@@ -64,7 +64,7 @@ export default function NewsPage() {
       title: "New RO Plant Extension For Industrial Ward",
       category: "INFRASTRUCTURE",
       desc: "Construction begins for the third RO water unit to meet the rising demand in the upcoming dairy cluster.",
-      image: "https://res.cloudinary.com/dpccapers/image/upload/v1767774292/WhatsApp_Image_2026-01-07_at_12.47.57_PM_1_e556te.jpg",
+      image: "/images/gallery13.png",
       ref: "LGP/WAT/2026/09"
     },
     {
@@ -82,7 +82,7 @@ export default function NewsPage() {
       title: "Public Address System Upgrade Completed",
       category: "GOVERNANCE",
       desc: "120 new high-fidelity waterproof speakers installed across all village internal roads for live broadcasts.",
-      image: "https://res.cloudinary.com/dpccapers/image/upload/v1767784998/ChatGPT_Image_Jan_7_2026_04_52_10_PM_xqujx1.png",
+      image: "/images/gallery10.png",
       ref: "LGP/GOV/2025/88"
     }
   ];
@@ -122,32 +122,44 @@ export default function NewsPage() {
           </div>
         </div>
 
-        {/* 3. BREAKING NEWS CAROUSEL */}
-        <div className="relative h-[500px] md:h-[600px] rounded-[2.5rem] overflow-hidden shadow-2xl mb-20 group border-8 border-slate-50">
-          <AnimatePresence mode="wait">
+         {/* 3. BREAKING NEWS CAROUSEL */}
+        <div className="relative h-[350px] md:h-[600px] rounded-[1.5rem] md:rounded-[2.5rem] overflow-hidden shadow-2xl mb-12 md:mb-20 bg-slate-900 border-4 md:border-8 border-white">
+          <AnimatePresence mode="popLayout">
             <motion.div 
               key={index} 
-              initial={{ opacity: 0, scale: 1.05 }} 
-              animate={{ opacity: 1, scale: 1 }} 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
               exit={{ opacity: 0 }} 
-              transition={{ duration: 1.2 }} 
-              className="absolute inset-0"
+              transition={{ duration: 0.8 }} 
+              className="absolute inset-0 w-full h-full"
             >
-              <Image src={breakingNews[index].image} fill className="object-cover" alt="News" />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/30 to-transparent"></div>
-              <div className="absolute bottom-0 left-0 p-8 md:p-16 text-white max-w-3xl text-left">
-                <span className="bg-orange-600 px-4 py-1 text-[10px] font-black uppercase tracking-widest mb-4 inline-block">Top Story</span>
-                <h2 className="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-[1.1] mb-4 italic">{breakingNews[index].title}</h2>
-                <p className="text-sm md:text-lg text-white/70 font-bold uppercase tracking-tight leading-relaxed">{breakingNews[index].desc}</p>
+              <Image 
+                src={breakingNews[index].image} 
+                fill 
+                className="object-cover object-center" 
+                alt="News" 
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 p-6 md:p-16 text-white w-full text-left">
+                <span className="bg-orange-600 px-3 py-1 text-[8px] md:text-[10px] font-black uppercase tracking-widest mb-3 inline-block shadow-lg">Top Story</span>
+                <h2 className="text-2xl md:text-5xl font-black uppercase tracking-tighter leading-tight mb-3 md:mb-4 italic">{breakingNews[index].title}</h2>
+                <p className="text-xs md:text-lg text-white/80 font-bold uppercase tracking-tight leading-snug max-w-3xl">{breakingNews[index].desc}</p>
               </div>
             </motion.div>
           </AnimatePresence>
-          <div className="absolute bottom-8 right-8 flex gap-2">
+          
+          <div className="absolute bottom-4 right-4 md:bottom-8 md:right-8 flex gap-2 z-20">
             {breakingNews.map((_, i) => (
-              <div key={i} className={`h-1.5 transition-all rounded-full ${index === i ? "w-12 bg-blue-600" : "w-4 bg-white/30"}`} />
+              <button 
+                key={i} 
+                onClick={() => setIndex(i)}
+                className={`h-1 md:h-1.5 transition-all rounded-full ${index === i ? "w-8 md:w-12 bg-blue-600" : "w-3 md:w-4 bg-white/40 hover:bg-white"}`} 
+              />
             ))}
           </div>
         </div>
+
 
         {/* 4. MAIN CONTENT GRID */}
         <div className="grid lg:grid-cols-12 gap-12">
